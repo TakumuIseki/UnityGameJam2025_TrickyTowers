@@ -4,18 +4,20 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-/// <summary>
-/// 表示するランキング順位
-/// </summary>
-enum RankingType
-{
-    First,
-    Second,
-    Third,
-}
 
 public class RankingScoreViewer : MonoBehaviour
 {
+    /// <summary>
+    /// 表示するランキング順位
+    /// </summary>
+    private enum RankingType
+    {
+        First,
+        Second,
+        Third,
+    }
+
+
     // 表示するランキングの順位
     [SerializeField]
     private RankingType rankingType_ = RankingType.First;
@@ -31,7 +33,7 @@ public class RankingScoreViewer : MonoBehaviour
         // ランキングデータの取得
         var rankingDatas = SaveData.Get().GetRankingDatas();
         // 指定した順位がランキングデータにない場合は非表示にしておく
-        if (rankingDatas.Count < (int)rankingType_)
+        if (rankingDatas.Count <= (int)rankingType_)
         {
             gameObject.SetActive(false);
             return;
@@ -41,7 +43,6 @@ public class RankingScoreViewer : MonoBehaviour
         rankingDatas.Sort((a, b) => b.height.CompareTo(a.height));
         // ランキングデータをテキストに反映 
         var children = GetComponentsInChildren<TextMeshProUGUI>();
-        Debug.Log("Children count: " + children.Length);
         foreach (var child in children)
         {
             RankingData rankingData = rankingDatas[(int)rankingType_];
