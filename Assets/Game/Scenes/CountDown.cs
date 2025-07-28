@@ -19,25 +19,35 @@ public class CountDown : MonoBehaviour
     void Update()
     {
         ShowText();
-        StartGame();
     }
 
     void ShowText() 
     {
-        if (countDown_ >= 1)
+        if (countDown_ > 0)
         {
             countDown_ -= Time.deltaTime;
+        }
+        
+        if (countDown_ >= 1)
+        {
+            
             count_ = (int)countDown_;
             countText_.text = count_.ToString();
         }
+        
         if (countDown_ <= 1)
         {
             countText_.text = "GO!";
+        }
 
+        if (countDown_ <= 0)
+        {
+            countText_.gameObject.SetActive(false); // カウントダウンが終わったらテキストを非表示にする。
+            ActiveGame(); // ゲームを開始するメソッドを呼び出す。
         }
     }
 
-    void StartGame() {
+    void ActiveGame() {
         //カウントダウンが終わったらゲームを開始する。
     }
 }
