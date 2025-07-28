@@ -5,33 +5,34 @@ using UnityEngine;
 
 public class CountDown : MonoBehaviour
 {
-    public TextMeshProUGUI countText;
-    float countDown = 4f;
-    int count = 4;
+    private TextMeshProUGUI countText_;
+    private float countDown_ = 4f;
+    private int count_ = 4;
 
     // Start is called before the first frame update
     void Start()
     {
-        countText = GetComponent<TextMeshProUGUI>();
+        countText_ = GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
         ShowText();
+        StartGame();
     }
 
     void ShowText() 
     {
-        if (countDown >= 1)
+        if (countDown_ >= 1)
         {
-            countDown -= Time.deltaTime;
-            count = (int)countDown;
-            countText.text = count.ToString();
+            countDown_ -= Time.deltaTime;
+            count_ = (int)countDown_;
+            countText_.text = count_.ToString();
         }
-        if (countDown <= 1)
+        if (countDown_ <= 1)
         {
-            countText.text = "GO!";
+            countText_.text = "GO!";
 
         }
     }
