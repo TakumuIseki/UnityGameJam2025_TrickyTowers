@@ -1,13 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class ControllableBlock : MonoBehaviour
 {
     private Rigidbody2D rb;
     private bool isFixed = false;
 
-    [Header("—‰º‘¬“x")]
-    public float normalFallSpeed = 1f;  // ’Êí‚Ì—‰º‘¬“xiunits/secj
-    public float fastFallSpeed = 5f;    // ‰Á‘¬‚Ì—‰º‘¬“x
+    [Header("è½ä¸‹é€Ÿåº¦")]
+    public static readonly float normalFallSpeed = 50f;  // é€šå¸¸æ™‚ã®è½ä¸‹é€Ÿåº¦ï¼ˆunits/secï¼‰
+    public static readonly float fastFallSpeed = 100f;    // åŠ é€Ÿæ™‚ã®è½ä¸‹é€Ÿåº¦
+
+    // ã‚¹ãƒ†ãƒ¼ã‚¸ã®å¤§ãã•
+    public static readonly int width = 400;
+    public static readonly int height = 800;
+
+
 
     void Start()
     {
@@ -22,21 +28,32 @@ public class ControllableBlock : MonoBehaviour
 
         float fallSpeed = Input.GetKey(KeyCode.DownArrow) ? fastFallSpeed : normalFallSpeed;
 
-        // ŠÔ‚É‚æ‚Á‚ÄˆÊ’u‚ğ‰º‚°‚éitransform‚ğ’¼Ú“®‚©‚·j
+        // æ™‚é–“ã«ã‚ˆã£ã¦ä½ç½®ã‚’ä¸‹ã’ã‚‹ï¼ˆtransformã‚’ç›´æ¥å‹•ã‹ã™ï¼‰
         transform.position += Vector3.down * fallSpeed * Time.deltaTime;
 
-        // ¶‰EˆÚ“®i•K—v‚È‚çj
+        // å·¦å³ç§»å‹•
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            transform.Translate(Vector3.left, Space.World);
+            transform.Translate(Vector3.left * 10, Space.World);
+
+            //// ä»Šå›è¿½åŠ 
+            //if (!ValidMovement())
+            //{
+            //    transform.position -= new Vector3(-10, 0, 0);
+            //}
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            transform.Translate(Vector3.right, Space.World);
+            transform.Translate(Vector3.right * 10, Space.World);
+
+            //if (!ValidMovement())
+            //{
+            //    transform.position -= new Vector3(10, 0, 0);
+            //}
         }
 
 
-        // ‰ñ“]i•K—v‚È‚çj
+        // å›è»¢
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.Rotate(0, 0, 90);
@@ -59,5 +76,21 @@ public class ControllableBlock : MonoBehaviour
         isFixed = true;
 
         this.enabled = false;
+    }
+
+    bool ValidMovement()
+    {
+        foreach (Transform children in transform)
+        {
+            int roundX = Mathf.RoundToInt(children.transform.position.x);
+            int roundY = Mathf.RoundToInt(children.transform.position.y);
+
+            // minoãŒã‚¹ãƒ†ãƒ¼ã‚¸ã‚ˆã‚Šã¯ã¿å‡ºã•ãªã„ã‚ˆã†ã«åˆ¶å¾¡
+            if (roundX < 0 || roundX >= width || roundY < 0 || roundY >= height)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
