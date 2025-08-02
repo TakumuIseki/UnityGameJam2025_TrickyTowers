@@ -11,19 +11,19 @@ public class SpawnTetrimino : MonoBehaviour
 
     void Start()
     {
+        // 最初の1回はStartでスポーンさせる。
         Spawn();
     }
 
-    void Update()
-    {
-
-    }
-
+    /// <summary>
+    /// テトリミノをスポーンさせる処理。
+    /// </summary>
     public void Spawn()
     {
         // Tetriminosに格納されたオブジェクトの中からランダムで1つスポーンさせます。
         GameObject tetrimino = Instantiate(Tetriminos[Random.Range(0, Tetriminos.Length)], transform.position, Quaternion.identity);
 
+        // テトリミノに親(スポナー)を伝える。
         ControllableBlock block = tetrimino.GetComponent<ControllableBlock>();
         block.SetSpawner(this);
     }
