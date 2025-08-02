@@ -484,6 +484,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 7760840133832717227, guid: a681ce5085adc9042aab033039bd2f9c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 960
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760840133832717227, guid: a681ce5085adc9042aab033039bd2f9c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 900
+      objectReference: {fileID: 0}
     - target: {fileID: 8687287127751337114, guid: a681ce5085adc9042aab033039bd2f9c, type: 3}
       propertyPath: m_Size.x
       value: 120
@@ -496,8 +504,36 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 3405352073142360643, guid: a681ce5085adc9042aab033039bd2f9c, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4919149625524929467, guid: a681ce5085adc9042aab033039bd2f9c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5440102123621972035}
   m_SourcePrefab: {fileID: 100100000, guid: a681ce5085adc9042aab033039bd2f9c, type: 3}
+--- !u!1 &5440102123621972034 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4919149625524929467, guid: a681ce5085adc9042aab033039bd2f9c, type: 3}
+  m_PrefabInstance: {fileID: 5440102123621972033}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5440102123621972035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440102123621972034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062ddaebe13d82043ab0aefc3afbedb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tetriminos:
+  - {fileID: 7416965475333134071, guid: 698aaf0a570e41245b834e6e3e11545b, type: 3}
+  - {fileID: 7220684335430710155, guid: 5da376a6214b08d47b934ad52ad789af, type: 3}
+  - {fileID: 2567443034512612672, guid: 794612f9fec50694aa4a3dc43ca983b5, type: 3}
+  - {fileID: 3345584176394373643, guid: 008b29c8af2d7cb4687983d7316e9227, type: 3}
+  - {fileID: 1239390474266883165, guid: 41c0176b9e422574bb5c98de42523c8b, type: 3}
+  - {fileID: 1906240304506388834, guid: 9f17d61d104e7bf4688dc208054adf73, type: 3}
+  - {fileID: 4586487290329178538, guid: 8aafce9476f8c1e458d77921a9ff868e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
