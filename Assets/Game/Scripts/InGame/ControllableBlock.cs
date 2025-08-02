@@ -1,6 +1,6 @@
-﻿///
+﻿/// <summary>
 /// テトリミノを制御するスクリプト。
-///
+/// </summary>
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -13,6 +13,9 @@ public class ControllableBlock : MonoBehaviour
     private static readonly float MOVE_DISTANCE_PER_KEY = 10f;              // 左右移動の幅。
     private static readonly Vector3 ROTATION_ANGLE = new Vector3(0, 0, 90); // 回転角度。
     private static readonly float GRAVITY = 30f;                            // 重力。
+
+    private SpawnTetrimino spawner;                                         // SpawnTetrimino型の変数。
+    private bool hasCollided = false;                                       // 当たり判定が一度検出されたら立てるフラグ。
 
     void Start()
     {
@@ -56,12 +59,32 @@ public class ControllableBlock : MonoBehaviour
     }
 
     /// <summary>
+    /// テトリミノを生成するスポナーを設定する。
+    /// </summary>
+    public void SetSpawner(SpawnTetrimino spawner)
+    {
+        this.spawner = spawner;
+    }
+
+    /// <summary>
     /// 他のオブジェクトと当たったときの処理。
     /// </summary>
-    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // 2回目以降は無視。
+        if (hasCollided)
+        {
+            return;
+        }
+        hasCollided = true;
+
+        // 重力を設定する。
         rb.gravityScale = GRAVITY;
+
+        // 操作不可にさせる。
         this.enabled = false;
+
+        // 次のテトリミノをスポーンさせる。
+        spawner.Spawn();
     }
 }
