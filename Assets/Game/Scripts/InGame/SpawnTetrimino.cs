@@ -11,12 +11,20 @@ public class SpawnTetrimino : MonoBehaviour
 
     void Start()
     {
-        // Tetriminosに格納されたオブジェクトの中からランダムで1つスポーンさせます。
-        Instantiate(Tetriminos[Random.Range(0, Tetriminos.Length)], transform.position, Quaternion.identity);
+        Spawn();
     }
 
     void Update()
     {
 
+    }
+
+    public void Spawn()
+    {
+        // Tetriminosに格納されたオブジェクトの中からランダムで1つスポーンさせます。
+        GameObject tetrimino = Instantiate(Tetriminos[Random.Range(0, Tetriminos.Length)], transform.position, Quaternion.identity);
+
+        ControllableBlock block = tetrimino.GetComponent<ControllableBlock>();
+        block.SetSpawner(this);
     }
 }

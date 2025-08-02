@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class ControllableBlock : MonoBehaviour
 {
+    private SpawnTetrimino spawner;                                         // SpawnTetrimino型の変数。
+    private bool hasCollided = false;
+
     private Rigidbody2D rb;                                                 // Rigitbody2Dを格納する変数。
 
     private static readonly float NORMAL_FALL_SPEED = 50f;                  // 通常時の落下速度（units/sec）。
@@ -56,12 +59,28 @@ public class ControllableBlock : MonoBehaviour
     }
 
     /// <summary>
+    /// テトリミノを生成するスポナーを設定する。
+    /// </summary>
+    public void SetSpawner(SpawnTetrimino spawner)
+    {
+        this.spawner = spawner;
+    }
+
+    /// <summary>
     /// 他のオブジェクトと当たったときの処理。
     /// </summary>
-    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // 2回目以降は無視
+        if (hasCollided)
+        {
+            return;
+        }
+        hasCollided = true;
+
         rb.gravityScale = GRAVITY;
         this.enabled = false;
+
+        spawner.Spawn();
     }
 }
