@@ -24,7 +24,7 @@ public class SpawnTetrimino : MonoBehaviour
         GameObject tetrimino = Instantiate(Tetriminos[Random.Range(0, Tetriminos.Length)], transform.position, Quaternion.identity);
 
         // テトリミノに親(スポナー)を伝える。
-        ControllableBlock block = tetrimino.GetComponent<ControllableBlock>();
+        var block = tetrimino.GetComponent<ControllableBlock>();
         block.SetSpawner(this);
     }
 }
