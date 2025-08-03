@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class SpawnTetrimino : MonoBehaviour
 {
-    public GameObject[] Tetriminos; // テトリミノを格納する配列。
+    [SerializeField]
+    private GameObject[] Tetriminos; // テトリミノを格納する配列。
 
     void Start()
     {
