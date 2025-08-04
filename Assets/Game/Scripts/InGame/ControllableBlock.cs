@@ -1,12 +1,11 @@
 ﻿/// <summary>
 /// テトリミノを制御するスクリプト。
 /// </summary>
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class ControllableBlock : MonoBehaviour
 {
-    private Rigidbody2D rb;                                                 // Rigitbody2Dを格納する変数。
+    private Rigidbody2D rb_;                                                 // Rigitbody2Dを格納する変数。
 
     private static readonly float NORMAL_FALL_SPEED = 50f;                  // 通常時の落下速度（units/sec）。
     private static readonly float FAST_FALL_SPEED = 100f;                   // 加速時の落下速度。
@@ -14,14 +13,14 @@ public class ControllableBlock : MonoBehaviour
     private static readonly Vector3 ROTATION_ANGLE = new Vector3(0, 0, 90); // 回転角度。
     private static readonly float GRAVITY = 30f;                            // 重力。
 
-    private SpawnTetrimino spawner;                                         // SpawnTetrimino型の変数。
-    private bool hasCollided = false;                                       // 当たり判定が一度検出されたら立てるフラグ。
+    private SpawnTetrimino spawner_;                                         // SpawnTetrimino型の変数。
+    private bool hasCollided_ = false;                                       // 当たり判定が一度検出されたら立てるフラグ。
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.gravityScale = 0f;
+        rb_ = GetComponent<Rigidbody2D>();
+        rb_.bodyType = RigidbodyType2D.Dynamic;
+        rb_.gravityScale = 0f;
     }
 
     void Update()
@@ -63,7 +62,7 @@ public class ControllableBlock : MonoBehaviour
     /// </summary>
     public void SetSpawner(SpawnTetrimino spawner)
     {
-        this.spawner = spawner;
+        this.spawner_ = spawner;
     }
 
     /// <summary>
@@ -72,19 +71,19 @@ public class ControllableBlock : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // 2回目以降は無視。
-        if (hasCollided)
+        if (hasCollided_)
         {
             return;
         }
-        hasCollided = true;
+        hasCollided_ = true;
 
         // 重力を設定する。
-        rb.gravityScale = GRAVITY;
+        rb_.gravityScale = GRAVITY;
 
         // 操作不可にさせる。
         this.enabled = false;
 
         // 次のテトリミノをスポーンさせる。
-        spawner.Spawn();
+        spawner_.Spawn();
     }
 }
