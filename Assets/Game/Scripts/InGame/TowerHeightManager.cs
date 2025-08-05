@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class TowerHeightManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI heightText_;    // 高さ表示UI。
+    [SerializeField] private TextMeshProUGUI heightText_;   // 高さ表示UI。
 
-    [SerializeField] private GameObject cart_;               // カートをアタッチ。
+    [SerializeField] private GameObject cart_;              // カートをアタッチ。
 
     private float globalMaxY_ = 0f;                         // このテトリミノの最も高い頂点のy座標を格納する。
 
