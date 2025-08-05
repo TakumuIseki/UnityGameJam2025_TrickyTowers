@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 993190401022619429}
   - component: {fileID: 1255293567609781831}
   - component: {fileID: 2639196845155068930}
+  - component: {fileID: 20581903811027351}
   m_Layer: 5
   m_Name: Height
   m_TagString: Untagged
@@ -134,3 +135,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &20581903811027351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4879469703979841308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1782367fe661c404393054f914a8ac28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightText_: {fileID: 0}
+  cart_: {fileID: 0}
