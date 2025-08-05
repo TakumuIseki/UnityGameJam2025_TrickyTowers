@@ -5,16 +5,18 @@ using UnityEngine;
 
 public class ControllableBlock : MonoBehaviour
 {
-    private Rigidbody2D rb_;                                                 // Rigitbody2Dを格納する変数。
-
     private static readonly float NORMAL_FALL_SPEED = 50f;                  // 通常時の落下速度（units/sec）。
     private static readonly float FAST_FALL_SPEED = 100f;                   // 加速時の落下速度。
     private static readonly float MOVE_DISTANCE_PER_KEY = 10f;              // 左右移動の幅。
     private static readonly Vector3 ROTATION_ANGLE = new Vector3(0, 0, 90); // 回転角度。
     private static readonly float GRAVITY = 30f;                            // 重力。
 
+    private Rigidbody2D rb_;                                                 // Rigitbody2Dを格納する変数。
     private SpawnTetrimino spawner_;                                         // SpawnTetrimino型の変数。
     private bool hasCollided_ = false;                                       // 当たり判定が一度検出されたら立てるフラグ。
+
+    [SerializeField]
+    private string tagToAssign = "Tower";                                    // 付与するタグ。
 
     void Start()
     {
@@ -85,5 +87,8 @@ public class ControllableBlock : MonoBehaviour
 
         // 次のテトリミノをスポーンさせる。
         spawner_.Spawn();
+
+        // タグを付与する。
+        gameObject.tag = tagToAssign;
     }
 }

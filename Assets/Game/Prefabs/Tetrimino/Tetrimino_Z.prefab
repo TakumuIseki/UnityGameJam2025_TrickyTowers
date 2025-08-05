@@ -270,6 +270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5319921871677180804}
   - component: {fileID: 8781788476346823825}
+  - component: {fileID: -3097456724622326951}
   - component: {fileID: 7526264258624474468}
   m_Layer: 0
   m_Name: Tetrimino_Z
@@ -307,6 +308,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cb0aad8783cb374194da8a4c6ea330d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagToAssign: Tower
+--- !u!114 &-3097456724622326951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586487290329178538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fa7ff4d53f6e6c4fb3473eeddac1487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!50 &7526264258624474468
