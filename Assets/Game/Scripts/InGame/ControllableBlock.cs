@@ -10,13 +10,14 @@ public class ControllableBlock : MonoBehaviour
     private static readonly float MOVE_DISTANCE_PER_KEY = 10f;              // 左右移動の幅。
     private static readonly Vector3 ROTATION_ANGLE = new Vector3(0, 0, 90); // 回転角度。
     private static readonly float GRAVITY = 30f;                            // 重力。
+    private static readonly float DESTROY_Y_THRESHOLD = -40f;               // このY座標を下回ったら消滅。
 
     private Rigidbody2D rb_;                                                 // Rigitbody2Dを格納する変数。
     private SpawnTetrimino spawner_;                                         // SpawnTetrimino型の変数。
     private bool hasCollided_ = false;                                       // 当たり判定が一度検出されたら立てるフラグ。
 
     [SerializeField]
-    private string tagToAssign = "Tower";                                    // 付与するタグ。
+    private string tagToAssign_ = "Tower";                                    // 付与するタグ。
 
     void Start()
     {
@@ -27,6 +28,14 @@ public class ControllableBlock : MonoBehaviour
 
     void Update()
     {
+        DestroyIfBelowThreshold();
+
+        // 当たり判定を検出したら、操作不可にする。
+        if (hasCollided_)
+        {
+            return;
+        }
+
         // 落下速度を決める処理。
         float fallSpeed = Input.GetKey(KeyCode.DownArrow) ? FAST_FALL_SPEED : NORMAL_FALL_SPEED;
 
@@ -82,13 +91,30 @@ public class ControllableBlock : MonoBehaviour
         // 重力を設定する。
         rb_.gravityScale = GRAVITY;
 
-        // 操作不可にさせる。
-        this.enabled = false;
-
         // 次のテトリミノをスポーンさせる。
         spawner_.Spawn();
 
         // タグを付与する。
-        gameObject.tag = tagToAssign;
+        gameObject.tag = tagToAssign_;
+    }
+
+    /// <summary>
+    /// テトリミノが落下した時の処理。
+    /// </summary>
+    private void DestroyIfBelowThreshold()
+    {
+        // テトリミノのy座標が一定以下になったら。
+        if (transform.position.y < DESTROY_Y_THRESHOLD)
+        {
+            // テトリミノ自身を削除する。
+            Destroy(gameObject);
+
+            // テトリミノにtowerタグが付いていなかったら。
+            if (gameObject.tag != tagToAssign_)
+            {
+                // 次のテトリミノをスポーンさせる。
+                spawner_.Spawn();
+            }
+        }
     }
 }
