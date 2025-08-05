@@ -1,53 +1,51 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/// <summary>
+/// カウントダウンを管理するスクリプト。
+/// </summary>
 using TMPro;
 using UnityEngine;
 
 public class CountDown : MonoBehaviour
 {
+    [SerializeField]
     private TextMeshProUGUI countText_;
     private float countDown_ = 4f;
     private int count_ = 4;
 
-    // Start is called before the first frame update
     void Start()
     {
         countText_ = GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ShowText();
     }
 
-    void ShowText() 
+    private void ShowText()
     {
-        if (countDown_ > 0)
-        {
-            countDown_ -= Time.deltaTime;
-        }
-        
+        countDown_ -= Time.deltaTime;
+
         if (countDown_ >= 1)
         {
-            
             count_ = (int)countDown_;
             countText_.text = count_.ToString();
         }
-        
-        if (countDown_ <= 1)
+
+        if (countDown_ < 1)
         {
             countText_.text = "GO!";
         }
 
-        if (countDown_ <= 0)
+        if (countDown_ < 0)
         {
-            countText_.gameObject.SetActive(false); // カウントダウンが終わったらテキストを非表示にする。
+            //countText_.gameObject.SetActive(false); // カウントダウンが終わったらテキストを非表示にする。
+            Destroy(gameObject);
             ActiveGame(); // ゲームを開始するメソッドを呼び出す。
         }
     }
 
-    void ActiveGame() {
+    private void ActiveGame()
+    {
         //カウントダウンが終わったらゲームを開始する。
     }
 }
