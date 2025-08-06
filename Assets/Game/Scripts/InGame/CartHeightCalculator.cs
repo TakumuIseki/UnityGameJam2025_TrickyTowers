@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CartHeightCalculator : MonoBehaviour
 {
-    public float maxY_ { get; private set; } = 0f;    // カートの最も高い頂点のy座標を格納する。
+    public float MaxY { get; private set; } = 0f;    // カートの最も高い頂点のy座標を格納する。
 
     void Start()
     {
@@ -18,6 +18,6 @@ public class CartHeightCalculator : MonoBehaviour
     private void CalcCartTopY()
     {
         var collider = GetComponent<Collider2D>();
-        maxY_ = collider.bounds.max.y;
+        MaxY = collider.bounds.max.y;
     }
 }

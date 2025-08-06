@@ -41,7 +41,7 @@ public class TowerHeightManager : MonoBehaviour
             var cartHeight = cart_.GetComponent<CartHeightCalculator>();
 
             // カート基準でテトリミノの高さを算出。
-            float topY = minoHeight.maxY_ - cartHeight.maxY_;
+            float topY = minoHeight.MaxY - cartHeight.MaxY;
 
             // 今の最高高度を上回ったら上書き。
             if (topY > globalMaxY_)
