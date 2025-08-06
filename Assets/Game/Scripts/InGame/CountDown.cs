@@ -7,13 +7,13 @@ using UnityEngine;
 public class CountDown : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI countText_;     // テキスト表示する。
-    private float countDown_ = 4f;          // 3,2,1,GO!の合算遷移時間。
-    private int count_ = 0;                 // float型のcountDown_を代入し、整数で表示する。
+    private TextMeshProUGUI countDownText_;     // テキスト表示する。
+    private float countDownTimer_ = 4f;         // 3,2,1,GO!の合算遷移時間。
+    private int currentCountDownValue_ = 0;     // float型のcountDown_を代入し、整数で表示する。
 
     void Start()
     {
-        countText_ = GetComponent<TextMeshProUGUI>();
+        countDownText_ = GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
@@ -26,22 +26,22 @@ public class CountDown : MonoBehaviour
     /// </summary>
     private void ShowText()
     {
-        countDown_ -= Time.deltaTime;
+        countDownTimer_ -= Time.deltaTime;
 
         // 3,2,1を表示する。
-        if (countDown_ >= 1)
+        if (countDownTimer_ >= 1)
         {
-            count_ = (int)countDown_;
-            countText_.text = count_.ToString();
+            currentCountDownValue_ = (int)countDownTimer_;
+            countDownText_.text = currentCountDownValue_.ToString();
         }
 
         // カウントダウンが残り1秒になったら、「GO!」と表示する。
-        if (countDown_ < 1)
+        if (countDownTimer_ < 1)
         {
-            countText_.text = "GO!";
+            countDownText_.text = "GO!";
         }
 
-        if (countDown_ < 0)
+        if (countDownTimer_ < 0)
         {
             // カウントダウンが終わったら自身を消滅させる。
             Destroy(gameObject);
