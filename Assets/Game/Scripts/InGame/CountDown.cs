@@ -1,53 +1,60 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/// <summary>
+/// カウントダウンを管理するスクリプト。
+/// </summary>
 using TMPro;
 using UnityEngine;
 
 public class CountDown : MonoBehaviour
 {
-    private TextMeshProUGUI countText_;
-    private float countDown_ = 4f;
-    private int count_ = 4;
+    [SerializeField]
+    private TextMeshProUGUI countDownText_;     // テキスト表示する。
+    private float countDownTimer_ = 4f;         // 3,2,1,GO!の合算遷移時間。
+    private int currentCountDownValue_ = 0;     // float型のcountDown_を代入し、整数で表示する。
 
-    // Start is called before the first frame update
     void Start()
     {
-        countText_ = GetComponent<TextMeshProUGUI>();
+        countDownText_ = GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ShowText();
     }
 
-    void ShowText() 
+    /// <summary>
+    /// カウントダウンのテキスト遷移設定。
+    /// </summary>
+    private void ShowText()
     {
-        if (countDown_ > 0)
+        countDownTimer_ -= Time.deltaTime;
+
+        // 3,2,1を表示する。
+        if (countDownTimer_ >= 1)
         {
-            countDown_ -= Time.deltaTime;
-        }
-        
-        if (countDown_ >= 1)
-        {
-            
-            count_ = (int)countDown_;
-            countText_.text = count_.ToString();
-        }
-        
-        if (countDown_ <= 1)
-        {
-            countText_.text = "GO!";
+            currentCountDownValue_ = (int)countDownTimer_;
+            countDownText_.text = currentCountDownValue_.ToString();
         }
 
-        if (countDown_ <= 0)
+        // カウントダウンが残り1秒になったら、「GO!」と表示する。
+        if (countDownTimer_ < 1)
         {
-            countText_.gameObject.SetActive(false); // カウントダウンが終わったらテキストを非表示にする。
-            ActiveGame(); // ゲームを開始するメソッドを呼び出す。
+            countDownText_.text = "GO!";
+        }
+
+        if (countDownTimer_ < 0)
+        {
+            // カウントダウンが終わったら自身を消滅させる。
+            Destroy(gameObject);
+
+            ActiveGame();
         }
     }
 
-    void ActiveGame() {
+    /// <summary>
+    /// ゲームを開始するメソッドを呼び出す。
+    /// </summary>
+    private void ActiveGame()
+    {
         //カウントダウンが終わったらゲームを開始する。
     }
 }

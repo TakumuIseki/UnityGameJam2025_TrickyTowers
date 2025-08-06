@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpawnTetrimino : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] Tetriminos_; // テトリミノを格納する配列。
+    private GameObject[] tetriminos_; // テトリミノを格納する配列。
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class SpawnTetrimino : MonoBehaviour
     {
         // Tetriminosに格納されたオブジェクトの中からランダムで1つスポーンさせます。
         GameObject tetrimino = Instantiate(
-            Tetriminos_[Random.Range(0, Tetriminos_.Length)],
+            tetriminos_[Random.Range(0, tetriminos_.Length)],
             transform.position,
             Quaternion.identity
         );
