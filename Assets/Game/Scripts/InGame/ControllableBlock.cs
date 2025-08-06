@@ -16,8 +16,8 @@ public class ControllableBlock : MonoBehaviour
     private SpawnTetrimino spawner_;                                         // SpawnTetrimino型の変数。
     private bool hasCollided_ = false;                                       // 当たり判定が一度検出されたら立てるフラグ。
 
-    [SerializeField]
-    private string tagToAssign_ = "Tower";                                    // 付与するタグ。
+    [Header("付与するタグ"), SerializeField]
+    private string tagToAssign_ = "Tower";
 
     void Start()
     {
