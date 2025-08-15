@@ -6,7 +6,7 @@ using UnityEngine;
 public class CartHeightCalculatorComponent : MonoBehaviour
 {
     [SerializeField]
-    private Collider2D colli;
+    private Collider2D colli_;
     public float TopY { get; private set; } = 0f;    // カートの最も高い頂点のy座標を格納する。
 
     private void Start()
@@ -21,6 +21,6 @@ public class CartHeightCalculatorComponent : MonoBehaviour
     {
         // 1フレーム待って物理計算後に取得
         yield return new WaitForFixedUpdate();
-        TopY = colli.bounds.max.y;
+        TopY = colli_.bounds.max.y;
     }
 }
