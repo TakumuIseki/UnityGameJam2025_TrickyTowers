@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 993190401022619429}
   - component: {fileID: 1255293567609781831}
+  - component: {fileID: 1570659350467421253}
   - component: {fileID: 2639196845155068930}
-  - component: {fileID: 20581903811027351}
   m_Layer: 5
   m_Name: Height
   m_TagString: Untagged
@@ -46,6 +46,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4879469703979841308}
   m_CullTransparentMesh: 1
+--- !u!114 &1570659350467421253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4879469703979841308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 762d9a5beb9d4a94db2ba020c80b872e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heightText_: {fileID: 2639196845155068930}
 --- !u!114 &2639196845155068930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,9 +79,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: height
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -88,7 +101,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 2425
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -132,20 +145,6 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &20581903811027351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4879469703979841308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1782367fe661c404393054f914a8ac28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heightText_: {fileID: 0}
-  cart_: {fileID: 0}
