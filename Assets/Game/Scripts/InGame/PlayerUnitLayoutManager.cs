@@ -13,7 +13,7 @@ public class PlayerUnitLayoutManager : MonoBehaviour
     }
 
     [Header("子オブジェクトの名前と位置")]
-    [SerializeField] private ChildPositionSetting[] positionSettings;
+    [SerializeField] private ChildPositionSetting[] positionSettings_;
 
     private void Start()
     {
@@ -26,7 +26,7 @@ public class PlayerUnitLayoutManager : MonoBehaviour
     private void SetupChildPositions()
     {
         // positionSettingsのelementsを順に処理。
-        foreach (var setting in positionSettings)
+        foreach (var setting in positionSettings_)
         {
             // オブジェクト名で探す。
             var childObject = transform.Find(setting.childName);
