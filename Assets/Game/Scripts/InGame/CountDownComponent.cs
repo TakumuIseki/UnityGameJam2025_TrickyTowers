@@ -4,7 +4,7 @@
 using TMPro;
 using UnityEngine;
 
-public class CountDown : MonoBehaviour
+public class CountDownComponent : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI countDownText_;     // テキスト表示する。
