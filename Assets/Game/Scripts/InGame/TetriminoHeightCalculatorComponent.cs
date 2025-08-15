@@ -3,9 +3,9 @@
 /// </summary>
 using UnityEngine;
 
-public class TetriminoHeightCalculator : MonoBehaviour
+public class TetriminoHeightCalculatorComponent : MonoBehaviour
 {
-    public float MaxY { get; private set; } = 0f;    // このテトリミノの最も高い頂点のy座標を格納する。
+    public float TopY { get; private set; } = 0f;    // このテトリミノの最も高い頂点のy座標を格納する。
 
     void Update()
     {
@@ -19,19 +19,16 @@ public class TetriminoHeightCalculator : MonoBehaviour
     private void CalcTetriminoTopY()
     {
         // 初期化。
-        MaxY = 0f;
+        TopY = 0f;
 
         // 子のRendererからbounds.max.yを調べる
         foreach (var renderer in GetComponentsInChildren<Renderer>())
         {
-            // 子のbounds.max.yをtopYに保存。
-            float topY = renderer.bounds.max.y;
+            // 子のbounds.max.yを保存。
+            float currentY = renderer.bounds.max.y;
 
-            // 子のbounds.max.yが記録していたyを上回ったら更新。
-            if (topY > MaxY)
-            {
-                MaxY = topY;
-            }
+            // 最も高いbounds.max.yをこのテトリミノの高さとする。
+            TopY = Mathf.Max(currentY, TopY);
         }
     }
 }
