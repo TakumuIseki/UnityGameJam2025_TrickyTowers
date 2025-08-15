@@ -76,13 +76,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cff02fce98a071f4eaa04ac7d3d196a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positionSettings:
-  - childName: TetriminoSpawnPoint
-    localPosition: {x: 0, y: 200}
+  positionSettings_:
   - childName: Cart
     localPosition: {x: 0, y: -200}
-  - childName: Height
-    localPosition: {x: 0, y: 0}
+  - childName: TetriminoSpawnPoint
+    localPosition: {x: 0, y: 200}
 --- !u!1001 &3392047712671838627
 PrefabInstance:
   m_ObjectHideFlags: 0
