@@ -3,10 +3,10 @@
 /// </summary>
 using UnityEngine;
 
-public class SpawnTetrimino : MonoBehaviour
+public class TetriminoSpawnerComponent : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] Tetriminos_; // テトリミノを格納する配列。
+    [Header("スポーンさせるテトリミノ"), SerializeField]
+    private GameObject[] tetriminos_;
 
     void Start()
     {
@@ -21,13 +21,14 @@ public class SpawnTetrimino : MonoBehaviour
     {
         // Tetriminosに格納されたオブジェクトの中からランダムで1つスポーンさせます。
         GameObject tetrimino = Instantiate(
-            Tetriminos_[Random.Range(0, Tetriminos_.Length)],
+            tetriminos_[Random.Range(0, tetriminos_.Length)],
             transform.position,
-            Quaternion.identity
+            Quaternion.identity,
+            transform                                           // このスポナーをテトリミノの親にする。
         );
 
         // テトリミノに親(スポナー)を伝える。
-        var block = tetrimino.GetComponent<ControllableBlock>();
+        var block = tetrimino.GetComponent<TetriminoControllerComponent>();
         block.SetSpawner(this);
     }
 }
