@@ -98,6 +98,14 @@ public class TowerHeightCalculatorComponent : MonoBehaviour
 
         foreach (GameObject tetrimino in tetriminos_)
         {
+            // テトリミノが消えた瞬間Findがかかる前にこの処理が走り、
+            // 消えたテトリミノの高さを算出しようとしてnullを返すので、
+            // このnullを無視する。
+            if (tetrimino == null)
+            {
+                return;
+            }
+
             // テトリミノのコンポーネントを取得。
             var minoHeight = tetrimino.GetComponent<TetriminoHeightCalculatorComponent>();
 
