@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿/// <summary>
+/// ランキングスコア表示
+/// </summary>
 using TMPro;
-using UnityEditor;
 using UnityEngine;
-
 
 public class RankingScoreViewer : MonoBehaviour
 {
@@ -17,13 +16,9 @@ public class RankingScoreViewer : MonoBehaviour
         Third,
     }
 
-
     // 表示するランキングの順位
     [SerializeField]
     private RankingType rankingType_ = RankingType.First;
-
-    
-    
 
     /// <summary>
     /// 初期化
@@ -57,7 +52,6 @@ public class RankingScoreViewer : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// ユーザー名設定
     /// </summary>
@@ -69,7 +63,6 @@ public class RankingScoreViewer : MonoBehaviour
         }
         textMeshPro.text = name;
     }
-
 
     /// <summary>
     /// スコア設定

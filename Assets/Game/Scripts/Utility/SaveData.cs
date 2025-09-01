@@ -1,14 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
-
-
-
-
 using ResultData = RankingData; // 結果データも同じ構造体を使用
-
 
 /// <summary>
 /// ランキングデータ
@@ -19,18 +13,12 @@ public struct RankingData
     public string name; // 名前
 }
 
-
-
-
 /// <summary>
 /// セーブデータ
 /// </summary>
 public class SaveData
 {
     private bool isRequestSave_ = false; // セーブリクエストフラグ
-
-
-
 
     /**
      * セーブデータファイルパス関連
@@ -41,9 +29,6 @@ public class SaveData
         private get { return saveFilePath_; }
         set { saveFilePath_ = value; }
     }
-
-
-
 
     /**
      * ランキングデータ関連
@@ -78,9 +63,6 @@ public class SaveData
         return resultDatas_; 
     }
 
-
-
-
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -88,7 +70,6 @@ public class SaveData
     {
         Desrialize();
     }
-
 
     /// <summary>
     /// 更新
@@ -104,7 +85,6 @@ public class SaveData
         }
     }
 
-
     /// <summary>
     /// セーブ処理本体
     /// </summary>
@@ -112,7 +92,6 @@ public class SaveData
     {
         Serialize(); // シリアライズ処理
     }
-
 
     /// <summary>
     /// シリアライズ処理
@@ -128,7 +107,6 @@ public class SaveData
         File.WriteAllText(path, json);
         Debug.Log($"ランキングデータを保存しました!");
     }
-
 
     /// <summary>
     /// デシリアライズ処理
@@ -153,7 +131,6 @@ public class SaveData
         }
     }
 
-
     /// <summary>
     /// セーブリクエスト
     /// </summary>
@@ -162,9 +139,6 @@ public class SaveData
         Debug.Log("セーブリクエストを受け付けました。");
         isRequestSave_ = true; // セーブリクエストフラグを立てる
     }
-
-
-
 
     /**
      * シングルトン用

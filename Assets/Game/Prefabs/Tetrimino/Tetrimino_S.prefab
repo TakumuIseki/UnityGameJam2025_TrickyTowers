@@ -139,7 +139,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9017600044204710495}
-  - component: {fileID: 8591854268031901663}
+  - component: {fileID: 5761726237780245858}
+  - component: {fileID: 2572986820482860429}
   - component: {fileID: 7730858765895073587}
   m_Layer: 0
   m_Name: Tetrimino_S
@@ -167,7 +168,7 @@ Transform:
   - {fileID: 4431725420996928889}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8591854268031901663
+--- !u!114 &5761726237780245858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,9 +177,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1239390474266883165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cb0aad8783cb374194da8a4c6ea330d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fa7ff4d53f6e6c4fb3473eeddac1487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2572986820482860429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239390474266883165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d5c14c8c30987740bd0887018ad7b7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody_: {fileID: 7730858765895073587}
+  tagToAssign_: Tower
 --- !u!50 &7730858765895073587
 Rigidbody2D:
   serializedVersion: 4
@@ -194,7 +209,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
