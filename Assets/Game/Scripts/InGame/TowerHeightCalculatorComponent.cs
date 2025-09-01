@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class TowerHeightCalculatorComponent : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI heightText_;        // 高さ表示UI。
+    [Header("高さ表示UI"),SerializeField]
+    private TextMeshProUGUI heightText_;
 
     private CartHeightCalculatorComponent cartHeight_;   // カートの高さを管理するコンポーネント。
 

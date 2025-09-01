@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class CountDownComponent : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI countDownText_;     // テキスト表示する。
+    [Header("カウントダウンテキスト"),SerializeField]
+    private TextMeshProUGUI countDownText_;
+
     private float countDownTimer_ = 4f;         // 3,2,1,GO!の合算遷移時間。
+
     private int currentCountDownValue_ = 0;     // float型のcountDown_を代入し、整数で表示する。
 
     void Start()

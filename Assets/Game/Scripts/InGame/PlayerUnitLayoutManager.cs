@@ -12,8 +12,8 @@ public class PlayerUnitLayoutManager : MonoBehaviour
         public Vector2 localPosition;   // 設定するローカル座標
     }
 
-    [Header("子オブジェクトの名前と位置")]
-    [SerializeField] private ChildPositionSetting[] positionSettings_;
+    [Header("子オブジェクトの名前と位置"),SerializeField]
+    private ChildPositionSetting[] positionSettings_;
 
     private void Start()
     {

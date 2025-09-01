@@ -8,7 +8,7 @@ public class InGameManager : MonoBehaviour
     [Header("PlayerUnitのプレハブ"), SerializeField]
     private GameObject playerUnitPrefab_;                               // 複製するプレイヤーユニットのプレハブ。
 
-    // コントローラーの入力に応じて変化するよう修正予定。
+    // NOTO:takebayashi コントローラーの入力に応じて変化するよう修正予定。
     [Header("プレイヤーの人数"), SerializeField]
     private int playerTotalCount_ = 2;
 
