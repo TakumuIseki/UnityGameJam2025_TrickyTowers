@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b34a4ea8de6a8d4e82eae79c01ca3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colli_: {fileID: 8778720189565710361}
+  collider_: {fileID: 8778720189565710361}
 --- !u!222 &3183924335599123478
 CanvasRenderer:
   m_ObjectHideFlags: 0

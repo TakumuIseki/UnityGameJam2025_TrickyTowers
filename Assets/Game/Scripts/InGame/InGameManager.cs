@@ -66,6 +66,18 @@ public class InGameManager : MonoBehaviour
         return firstPlayerWindowCenterX;
     }
 
+    /// <summary>
+    /// ウィンドウのX座標中央を取得。
+    /// </summary>
+    private float GetWindowCenterX()
+    {
+        float windowCenterX = Screen.width / 2;
+        return windowCenterX;
+    }
+
+    /// <summary>
+    /// ウィンドウのY座標中央を取得。
+    /// </summary>
     private float GetWindowCenterY()
     {
         float windowCenterY = Screen.height / 2;
