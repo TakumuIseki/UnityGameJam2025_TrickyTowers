@@ -71,8 +71,8 @@ public class InGameManager : MonoBehaviour
     /// </summary>
     private float GetWindowCenterX()
     {
-        float windowCenterY = Screen.width / 2;
-        return windowCenterY;
+        float windowCenterX = Screen.width / 2;
+        return windowCenterX;
     }
 
     /// <summary>
