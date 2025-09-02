@@ -25,6 +25,12 @@ public class NewBehaviourScript : MonoBehaviour
         // 経過時間に応じて残り時間を算出。
         currentTime_ -= Time.deltaTime;
 
+        // currentTime_は0より小さくならない。
+        if (currentTime_ < 0.0f)
+        {
+            currentTime_ = 0.0f;
+        }
+
         // 残り時間を表示。
         timerText_.text = $"TIME: {(int)currentTime_}";
     }
