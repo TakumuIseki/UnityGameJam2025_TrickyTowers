@@ -10,6 +10,7 @@ public class TetriminoSpawnerComponent : MonoBehaviour
 
     private Transform playerUnit_;              // 自身の親（PlayerUnit）を格納する。
     private Transform nextTetriminoViewPoint_;  // 同じPlayerUnitに属する、次に生成するテトリミノを表示する場所を格納する。
+    private GameObject nextTetrimino_;          // 次にスポーンされるテトリミノのインスタンスを格納する。
 
     void Start()
     {
@@ -50,7 +51,6 @@ public class TetriminoSpawnerComponent : MonoBehaviour
             Debug.LogError($"NextTetriminoViewPointが見つかりません。");
         }
     }
-    private GameObject nextTetrimino_;
 
     /// <summary>
     /// テトリミノをスポーンさせる処理。
