@@ -28,17 +28,8 @@ public class TetriminoControllerComponent : MonoBehaviour
     }
     void Update()
     {
-        // 当たり判定を検出したら、操作不可にする。
-        if (!hasCollided_)
-        {
-            HandleMovementAndRotation();
-        }
-
-        // テトリミノのy座標が一定以下になったら、削除する。
-        if (transform.position.y < DESTROY_Y_THRESHOLD)
-        {
-            DestroyIfBelowThreshold();
-        }
+        HandleMovementAndRotation();
+        DestroyIfBelowThreshold();
     }
 
     /// <summary>
@@ -46,6 +37,12 @@ public class TetriminoControllerComponent : MonoBehaviour
     /// </summary>
     private void HandleMovementAndRotation()
     {
+        // 当たり判定を検出したら、操作不可にする。
+        if (hasCollided_)
+        {
+            return;
+        }
+
         // 落下速度を決める処理。
         float fallSpeed = Input.GetKey(KeyCode.DownArrow) ? FAST_FALL_SPEED : NORMAL_FALL_SPEED;
 
@@ -124,7 +121,7 @@ public class TetriminoControllerComponent : MonoBehaviour
         rigidBody_.gravityScale = GRAVITY;
 
         // 次のテトリミノをスポーンさせる。
-        spawner_.Spawn();
+        spawner_.SpawnTetrimino();
 
         // タグを付与する。
         gameObject.tag = tagToAssign_;
@@ -138,6 +135,12 @@ public class TetriminoControllerComponent : MonoBehaviour
     /// </summary>
     private void DestroyIfBelowThreshold()
     {
+        // テトリミノのy座標が一定以下になったら、削除する。
+        if (transform.position.y > DESTROY_Y_THRESHOLD)
+        {
+            return;
+        }
+
         // テトリミノ自身を削除する。
         Destroy(gameObject);
 
@@ -150,7 +153,7 @@ public class TetriminoControllerComponent : MonoBehaviour
         else
         {
             // 次のテトリミノをスポーンさせる。
-            spawner_.Spawn();
+            spawner_.SpawnTetrimino();
         }
     }
 }
