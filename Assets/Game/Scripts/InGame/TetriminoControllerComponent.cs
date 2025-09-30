@@ -11,6 +11,7 @@ public class TetriminoControllerComponent : MonoBehaviour
     private static readonly Vector3 ROTATION_ANGLE = new Vector3(0.0f, 0.0f, 90.0f);    // 回転角度。
     private static readonly float GRAVITY = 30.0f;                                      // 重力。
     private static readonly float DESTROY_Y_THRESHOLD = -40.0f;                         // このY座標を下回ったら消滅。
+    private static readonly float SCALE_UP_RATIO = 2.0f;                                // ミノの巨大化倍率。
 
     [Header("自身のRigidBody2D"), SerializeField]
     private Rigidbody2D rigidBody_;
@@ -94,7 +95,7 @@ public class TetriminoControllerComponent : MonoBehaviour
         }
 
         // 上キーで90度回転。
-        if (Input.GetKeyDown(KeyCode.UpArrow) && !isLockRotation_)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.Rotate(ROTATION_ANGLE);
         }
@@ -221,7 +222,7 @@ public class TetriminoControllerComponent : MonoBehaviour
     public void ScaleUpSkill()
     {
         // 巨大化スキルを有効化。
-        transform.localScale *= 2f;
+        transform.localScale *= SCALE_UP_RATIO;
 
         // スポーン位置に戻す。
         transform.position = spawner_.transform.position;

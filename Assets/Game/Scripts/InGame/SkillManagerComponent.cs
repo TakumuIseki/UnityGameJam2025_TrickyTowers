@@ -34,7 +34,7 @@ public class SkillManagerComponent : MonoBehaviour
         // スキルポイントを蓄積。
         currentSkillPoint_ += myRank_ * Time.deltaTime;
 
-        // スキルポイントが貯まったらスキルをスキルを有効化。
+        // スキルポイントが貯まったらスキルを有効化。
         if (currentSkillPoint_ >= REQUIRED_SKILL_POINT)
         {
             ActiveSkill();
@@ -105,9 +105,6 @@ public class SkillManagerComponent : MonoBehaviour
     private void InvincibleSkill()
     {
         isInvincibleSkill_ = true;
-        //GetControlledTetrimino();
-        //skillTargetTetrimino_.SetIsActiveBindSkill();
-        //skillTargetTetrimino_.transform.position = tetriminoSpawner_.transform.position;
     }
 
     /// <summary>
