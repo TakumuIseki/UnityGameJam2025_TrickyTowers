@@ -7,14 +7,18 @@ using UnityEngine;
 public class SkillManagerComponent : MonoBehaviour
 {
     private static readonly float REQUIRED_SKILL_POINT = 60.0f; // スキル発動に必要なポイント。
+    private static readonly float INVINCIBLE_DURATION = 30.0f;  // 無敵スキルの持続時間。
 
     private float currentSkillPoint_ = 0.0f;                    // 現在のスキルポイント。
-    private int myRank_ = 10;                                    // 自分の順位。
+    private int myRank_ = 10;                                   // 自分の順位。
     private Transform UiCanvas_;                                // スキルのUIをまとめたキャンバス。
 
     private GameObject[] otherPlayerUnits_;                     // 他のプレイヤーユニット。
     private TetriminoSpawnerComponent tetriminoSpawner_;        // 子のスポナーを取得。
     private TetriminoControllerComponent skillTargetTetrimino_; // 操作中のテトリミノを格納する変数。
+
+    private bool isInvincibleSkill_ = false;                    // 無敵スキルが有効かどうかをミノが参照できるようにする。
+    private float invincibleTimer_ = 0.0f;                      // 無敵スキルの持続時間。
 
     void Start()
     {
@@ -35,6 +39,9 @@ public class SkillManagerComponent : MonoBehaviour
         {
             ActiveSkill();
         }
+
+        // 無敵スキルの持続時間を管理。
+        DeactivateInvincibleSkill();
     }
 
     /// <summary>
@@ -97,9 +104,10 @@ public class SkillManagerComponent : MonoBehaviour
     /// </summary>
     private void InvincibleSkill()
     {
-        GetControlledTetrimino();
-        skillTargetTetrimino_.SetIsActiveBindSkill();
-        skillTargetTetrimino_.transform.position = tetriminoSpawner_.transform.position;
+        isInvincibleSkill_ = true;
+        //GetControlledTetrimino();
+        //skillTargetTetrimino_.SetIsActiveBindSkill();
+        //skillTargetTetrimino_.transform.position = tetriminoSpawner_.transform.position;
     }
 
     /// <summary>
@@ -143,6 +151,7 @@ public class SkillManagerComponent : MonoBehaviour
     {
         foreach (var unit in otherPlayerUnits_)
         {
+            // 他のプレイヤーユニットのSkillManagerComponentを取得。
             var otherSkillManager = unit.GetComponentInChildren<SkillManagerComponent>();
             if (otherSkillManager == null)
             {
@@ -150,6 +159,13 @@ public class SkillManagerComponent : MonoBehaviour
                 continue;
             }
 
+            // 他のプレイヤーが無敵スキルを使っていたらスキルを発動しない。
+            if (otherSkillManager.isInvincibleSkill_)
+            {
+                continue;
+            }
+
+            // 他のプレイヤーの操作中のテトリミノを取得。
             otherSkillManager.GetControlledTetrimino();
             var tetrimino = otherSkillManager.skillTargetTetrimino_;
             if (tetrimino == null)
@@ -162,4 +178,19 @@ public class SkillManagerComponent : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 一定時間が経ったら、無敵を解除する。
+    /// </summary>
+    private void DeactivateInvincibleSkill()
+    {
+        if (isInvincibleSkill_)
+        {
+            invincibleTimer_ += Time.deltaTime;
+            if (invincibleTimer_ >= INVINCIBLE_DURATION)
+            {
+                invincibleTimer_ = 0.0f;
+                isInvincibleSkill_ = false;
+            }
+        }
+    }
 }
