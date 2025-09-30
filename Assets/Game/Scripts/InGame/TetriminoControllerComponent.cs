@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class TetriminoControllerComponent : MonoBehaviour
 {
-    private static readonly float NORMAL_FALL_SPEED = 50f;                  // 通常時の落下速度（units/sec）。
-    private static readonly float FAST_FALL_SPEED = 100f;                   // 加速時の落下速度。
-    private static readonly float MOVE_DISTANCE_PER_KEY = 10f;              // 左右移動の幅。
-    private static readonly Vector3 ROTATION_ANGLE = new Vector3(0, 0, 90); // 回転角度。
-    private static readonly float GRAVITY = 30f;                            // 重力。
-    private static readonly float DESTROY_Y_THRESHOLD = -40f;               // このY座標を下回ったら消滅。
+    private static readonly float NORMAL_FALL_SPEED = 50.0f;                            // 通常時の落下速度（units/sec）。
+    private static readonly float FAST_FALL_SPEED = 100.0f;                             // 加速時の落下速度。
+    private static readonly float MOVE_DISTANCE_PER_KEY = 10.0f;                        // 左右移動の幅。
+    private static readonly Vector3 ROTATION_ANGLE = new Vector3(0.0f, 0.0f, 90.0f);    // 回転角度。
+    private static readonly float GRAVITY = 30.0f;                                      // 重力。
+    private static readonly float DESTROY_Y_THRESHOLD = -40.0f;                         // このY座標を下回ったら消滅。
+    private static readonly float INVINCIBLE_DURATION = 30.0f;                          // 無敵スキルの持続時間。
 
     [Header("自身のRigidBody2D"), SerializeField]
     private Rigidbody2D rigidBody_;
@@ -21,6 +22,19 @@ public class TetriminoControllerComponent : MonoBehaviour
     private TowerHeightCalculatorComponent towerHeightCalculator_;          // TowerHeightCalculatorComponent型の変数。
     private TetriminoSpawnerComponent spawner_;                             // SpawnTetrimino型の変数。
     private bool hasCollided_ = false;                                      // 当たり判定が一度検出されたら立てるフラグ。
+    private bool isActiveBindSkill_ = false;                                // バインドスキルが有効かどうか。
+    private bool isInvincibleSkill_ = false;                                // 無敵スキルが有効かどうか。
+    private float invincibleTimer_ = 0.0f;                                  // 無敵スキルの持続時間。
+    private bool isLockRotation_ = false;                                   // 回転不可スキルが有効かどうか。
+
+    /// <summary>
+    /// バインドスキルを有効にする。
+    /// </summary>
+    public void SetIsActiveBindSkill()
+    {
+        isActiveBindSkill_ = true;
+    }
+
 
     void Start()
     {
@@ -30,6 +44,7 @@ public class TetriminoControllerComponent : MonoBehaviour
     {
         HandleMovementAndRotation();
         DestroyIfBelowThreshold();
+        DeactivateInvincibleSkill();
     }
 
     /// <summary>
@@ -55,11 +70,8 @@ public class TetriminoControllerComponent : MonoBehaviour
         // 右に移動。
         Move(Input.GetKeyDown(KeyCode.RightArrow), Vector3.right);
 
-        // 回転処理。
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            transform.Rotate(ROTATION_ANGLE);
-        }
+        // 回転操作。
+        HandleRotation();
     }
 
     /// <summary>
@@ -72,6 +84,24 @@ public class TetriminoControllerComponent : MonoBehaviour
         if (getKeyDown)
         {
             transform.Translate(direction * MOVE_DISTANCE_PER_KEY, Space.World);
+        }
+    }
+
+    /// <summary>
+    /// 回転処理用メソッド。
+    /// </summary> 
+    private void HandleRotation()
+    {
+        // 回転不可スキルが有効化されていたら回転しない。
+        if (isLockRotation_)
+        {
+            return;
+        }
+
+        // 上キーで90度回転。
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !isLockRotation_)
+        {
+            transform.Rotate(ROTATION_ANGLE);
         }
     }
 
@@ -117,6 +147,12 @@ public class TetriminoControllerComponent : MonoBehaviour
         }
         hasCollided_ = true;
 
+        // バインドスキルが有効化されていたら発動。
+        if (isActiveBindSkill_)
+        {
+            BindWithTower(collision.gameObject);
+        }
+
         // 重力を設定する。
         rigidBody_.gravityScale = GRAVITY;
 
@@ -155,5 +191,89 @@ public class TetriminoControllerComponent : MonoBehaviour
             // 次のテトリミノをスポーンさせる。
             spawner_.SpawnTetrimino();
         }
+    }
+
+
+    /// <summary>
+    /// 他のテトリミノと接触したときに結合させる処理。
+    /// </summary>
+    /// <param name="towerTetrimino"> 接触したテトリミノ。</param>
+    private void BindWithTower(GameObject towerTetrimino)
+    {
+        if (!towerTetrimino.CompareTag("Tower"))
+        {
+            return;
+        }
+
+        // 自分にFixedJoint2Dを追加
+        var joint = gameObject.AddComponent<FixedJoint2D>();
+        joint.connectedBody = towerTetrimino.GetComponent<Rigidbody2D>();
+
+        // 壊れないようにする
+        joint.breakForce = Mathf.Infinity;
+        joint.breakTorque = Mathf.Infinity;
+
+        // ぶつかった後も押し合えるようにする
+        joint.enableCollision = true;
+
+        // バインドスキルを無効化。
+        isActiveBindSkill_ = false;
+    }
+
+    /// <summary>
+    /// 自身が無敵になる処理。
+    /// </summary>
+    public void ActivateInvincibleSkill()
+    {
+        isInvincibleSkill_ = true;
+    }
+
+    public void DeactivateInvincibleSkill()
+    {
+        if (isInvincibleSkill_)
+        {
+            invincibleTimer_ += Time.deltaTime;
+            if (invincibleTimer_ >= INVINCIBLE_DURATION)
+            {
+                invincibleTimer_ = 0.0f;
+                isInvincibleSkill_ = false;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 自分の操作しているテトリミノを巨大化する処理。
+    /// </summary>
+    public void ScaleUpSkill()
+    {
+        // 無敵スキルが有効化されていたら発動しない。
+        if (isInvincibleSkill_)
+        {
+            return;
+        }
+
+        // 巨大化スキルを有効化。
+        transform.localScale *= 2f;
+
+        // スポーン位置に戻す。
+        transform.position = spawner_.transform.position;
+    }
+
+    /// <summary>
+    /// 自分の操作しているテトリミノを回転不可にする処理。
+    /// </summary>
+    public void LockRotationSkill()
+    {
+        // 無敵スキルが有効化されていたら発動しない。
+        if (isInvincibleSkill_)
+        {
+            return;
+        }
+
+        // 回転不可スキルを有効化。
+        isLockRotation_ = true;
+
+        // スポーン位置に戻す。
+        transform.position = spawner_.transform.position;
     }
 }

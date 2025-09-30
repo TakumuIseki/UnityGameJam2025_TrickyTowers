@@ -21,6 +21,7 @@ public class InGameManager : MonoBehaviour
         widthPerPlayer_ = Screen.width / playerTotalCount_;
 
         SpawnPlayerUnits(playerTotalCount_);
+        SetOtherPlayerUnitsToEachSkillManager();
     }
 
     /// <summary>
@@ -57,6 +58,43 @@ public class InGameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 他のプレイヤーユニットを取得して各スキルマネージャーに渡す。
+    /// </summary>
+    private void SetOtherPlayerUnitsToEachSkillManager()
+    {
+        // 全てのプレイヤーユニットで順に処理。
+        foreach (var unit in playerUnits_)
+        {
+            // スキルマネージャーを取得。
+            var skillManager = unit.GetComponent<SkillManagerComponent>();
+
+            // スキルマネージャーが見つからない場合は警告。
+            if (skillManager == null)
+            {
+                Debug.LogError($"SkillManagerComponentが見つかりません。");
+                continue;
+            }
+
+            // 他のプレイヤーユニットを格納する変数を用意。
+            var others = new System.Collections.Generic.List<GameObject>();
+
+            // 全てのプレイヤーユニットで順に処理。
+            foreach (var otherUnit in playerUnits_)
+            {
+                // 自分以外のプレイヤーユニットを変数に格納する。
+                if (otherUnit != unit)
+                {
+                    others.Add(otherUnit);
+                }
+            }
+
+            // 取得した他のプレイヤーユニットをスキルマネージャーに渡す。
+            skillManager.SetOtherPlayerUnits(others.ToArray());
+        }
+    }
+
+
+    /// <summary>
     /// 1人目のプレイヤーのウィンドウの中央位置（X座標）を取得。
     /// </summary>
     /// <returns></returns>
@@ -64,15 +102,6 @@ public class InGameManager : MonoBehaviour
     {
         float firstPlayerWindowCenterX = Screen.width / playerTotalCount_ - widthPerPlayer_ / 2;
         return firstPlayerWindowCenterX;
-    }
-
-    /// <summary>
-    /// ウィンドウのX座標中央を取得。
-    /// </summary>
-    private float GetWindowCenterX()
-    {
-        float windowCenterX = Screen.width / 2;
-        return windowCenterX;
     }
 
     /// <summary>
