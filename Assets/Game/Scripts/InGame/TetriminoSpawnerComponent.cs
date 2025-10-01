@@ -8,9 +8,11 @@ public class TetriminoSpawnerComponent : MonoBehaviour
     [Header("スポーンさせるテトリミノ"), SerializeField]
     private GameObject[] tetriminos_;
 
-    private Transform playerUnit_;              // 自身の親（PlayerUnit）を格納する。
-    private Transform nextTetriminoViewPoint_;  // 同じPlayerUnitに属する、次に生成するテトリミノを表示する場所を格納する。
-    private GameObject nextTetrimino_;          // 次にスポーンされるテトリミノのインスタンスを格納する。
+    private Transform playerUnit_;                              // 自身の親（PlayerUnit）を格納する。
+    private Transform nextTetriminoViewPoint_;                  // 同じPlayerUnitに属する、次に生成するテトリミノを表示する場所を格納する。
+    private GameObject nextTetrimino_;                          // 次にスポーンされるテトリミノのインスタンスを格納する。
+
+    public TetriminoControllerComponent controlledTetrimino_;   // 操作中のテトリミノ。スキル発動時に使用。
 
     void Start()
     {
@@ -64,9 +66,9 @@ public class TetriminoSpawnerComponent : MonoBehaviour
         nextTetrimino_.transform.SetParent(transform);
 
         // テトリミノの操作を有効化。
-        var controller = nextTetrimino_.GetComponent<TetriminoControllerComponent>();
-        controller.SetSpawner(this);
-        controller.enabled = true;
+        controlledTetrimino_ = nextTetrimino_.GetComponent<TetriminoControllerComponent>();
+        controlledTetrimino_.SetSpawner(this);
+        controlledTetrimino_.enabled = true;
 
         // 次のテトリミノを生成して表示。
         ViewNextTetrimino();
