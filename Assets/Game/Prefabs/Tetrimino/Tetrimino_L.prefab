@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6520601981821025764}
   - component: {fileID: -1764421700069137948}
   - component: {fileID: 5641334304773288440}
+  - component: {fileID: 7451742100514529104}
   - component: {fileID: 1100492527744744794}
   - component: {fileID: 6599810323256251446}
   - component: {fileID: 7325628404207801037}
@@ -62,6 +63,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody_: {fileID: 1100492527744744794}
   tagToAssign_: Tower
+--- !u!114 &7451742100514529104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2567443034512612672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b689008d50d40d4990399cadb62639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody_: {fileID: 1100492527744744794}
+  color_: {r: 1, g: 0, b: 0, a: 1}
+  centerOfMassOffset_: {x: 2, y: -1.25}
 --- !u!50 &1100492527744744794
 Rigidbody2D:
   serializedVersion: 4
@@ -186,6 +202,7 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 1.25, y: 2.52}
+      - {x: 1.2123339, y: 0.016136646}
       - {x: -3.77, y: 0.01}
       - {x: -3.77, y: -2.52}
       - {x: 3.77, y: -2.52}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7476259456664592555}
   - component: {fileID: -6866063908091577563}
   - component: {fileID: 180910979509574943}
+  - component: {fileID: 8494470171444446077}
   - component: {fileID: 4349444267114977419}
   - component: {fileID: 932168779561529063}
   - component: {fileID: 299791558265717464}
@@ -62,6 +63,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody_: {fileID: 4349444267114977419}
   tagToAssign_: Tower
+--- !u!114 &8494470171444446077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7416965475333134071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b689008d50d40d4990399cadb62639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody_: {fileID: 4349444267114977419}
+  color_: {r: 1, g: 0, b: 0, a: 1}
+  centerOfMassOffset_: {x: 0, y: 0}
 --- !u!50 &4349444267114977419
 Rigidbody2D:
   serializedVersion: 4
@@ -74,7 +90,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1625.6
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
