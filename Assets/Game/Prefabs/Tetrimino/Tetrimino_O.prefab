@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8179169824248123013}
   - component: {fileID: 4558322616964731829}
   - component: {fileID: 2878727789970512017}
+  - component: {fileID: 2275187236373926136}
   - component: {fileID: 5065426211493673386}
   - component: {fileID: 6864939670350247977}
   - component: {fileID: 8068649344957970906}
@@ -62,6 +63,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody_: {fileID: 5065426211493673386}
   tagToAssign_: Tower
+--- !u!114 &2275187236373926136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3345584176394373643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b689008d50d40d4990399cadb62639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody_: {fileID: 5065426211493673386}
+  color_: {r: 1, g: 0, b: 0, a: 1}
+  centerOfMassOffset_: {x: 0, y: 0}
 --- !u!50 &5065426211493673386
 Rigidbody2D:
   serializedVersion: 4
