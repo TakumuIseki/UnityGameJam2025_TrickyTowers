@@ -52,3 +52,10 @@ MonoBehaviour:
   - {fileID: 1239390474266883165, guid: 41c0176b9e422574bb5c98de42523c8b, type: 3}
   - {fileID: 1906240304506388834, guid: 9f17d61d104e7bf4688dc208054adf73, type: 3}
   - {fileID: 4586487290329178538, guid: 8aafce9476f8c1e458d77921a9ff868e, type: 3}
+  - {fileID: 3345584176394373643, guid: c0bdcd2d30047404a873f953739a7ba1, type: 3}
+  - {fileID: 3345584176394373643, guid: c0bdcd2d30047404a873f953739a7ba1, type: 3}
+  - {fileID: 3345584176394373643, guid: c0bdcd2d30047404a873f953739a7ba1, type: 3}
+  - {fileID: 3345584176394373643, guid: a8daf6ed348dc420da0341671642ff6c, type: 3}
+  - {fileID: 3345584176394373643, guid: a8daf6ed348dc420da0341671642ff6c, type: 3}
+  - {fileID: 3345584176394373643, guid: a8daf6ed348dc420da0341671642ff6c, type: 3}
+  controlledTetrimino_: {fileID: 0}
