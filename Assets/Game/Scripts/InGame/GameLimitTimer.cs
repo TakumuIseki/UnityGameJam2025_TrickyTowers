@@ -3,6 +3,7 @@
 /// </summary>
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameLimitTimer : MonoBehaviour
 {
@@ -25,10 +26,11 @@ public class GameLimitTimer : MonoBehaviour
         // 経過時間に応じて残り時間を算出。
         currentTime_ -= Time.deltaTime;
 
-        // currentTime_は0より小さくならない。
         if (currentTime_ < 0.0f)
         {
-            currentTime_ = 0.0f;
+            // リザルトへ遷移
+            // TODO:iseki 今は即時遷移...
+            SceneManager.LoadScene("RankingScene");
         }
 
         // 残り時間を表示。
