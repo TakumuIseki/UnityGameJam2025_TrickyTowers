@@ -13,36 +13,30 @@ public class CountDownComponent : MonoBehaviour
 
     private int currentCountDownValue_ = 0;     // float型のcountDown_を代入し、整数で表示する。
 
-    void Start()
-    {
-        countDownText_ = GetComponent<TextMeshProUGUI>();
-    }
-
+    /// <summary>
+    /// Update
+    /// </summary>
     void Update()
     {
-        ShowText();
+        CoundDown();
     }
 
     /// <summary>
-    /// カウントダウンのテキスト遷移設定。
+    /// カウントダウン
     /// </summary>
-    private void ShowText()
+    private void CoundDown()
     {
         countDownTimer_ -= Time.deltaTime;
 
-        // 3,2,1を表示する。
         if (countDownTimer_ >= 1)
         {
             currentCountDownValue_ = (int)countDownTimer_;
             countDownText_.text = currentCountDownValue_.ToString();
         }
-
-        // カウントダウンが残り1秒になったら、「GO!」と表示する。
         if (countDownTimer_ < 1)
         {
-            countDownText_.text = "GO!";
+            countDownText_.text = "スタート！";
         }
-
         if (countDownTimer_ < 0)
         {
             // カウントダウンが終わったら自身を消滅させる。

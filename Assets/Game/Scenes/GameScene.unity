@@ -303,7 +303,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u3088\u30FC\u3044"
+  m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c5e431926659d415aab7f4f7c0a084d7, type: 2}
   m_sharedMaterial: {fileID: -3678713964572923016, guid: c5e431926659d415aab7f4f7c0a084d7, type: 2}
