@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 940347198}
   - component: {fileID: 940347197}
   m_Layer: 5
-  m_Name: PressAnyKeyText
+  m_Name: PressKeyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -540,10 +540,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PRESS ANY KEY
+  m_text: "A\u30DC\u30BF\u30F3\u3067\u30B9\u30BF\u30FC\u30C8\uFF01"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c5e431926659d415aab7f4f7c0a084d7, type: 2}
+  m_sharedMaterial: {fileID: -3678713964572923016, guid: c5e431926659d415aab7f4f7c0a084d7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
