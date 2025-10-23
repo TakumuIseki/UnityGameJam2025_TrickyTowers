@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 295a36d25f5cc744a93f3e438889e491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countDownText_: {fileID: 0}
+  countDownText_: {fileID: 1602614805256136402}
 --- !u!114 &2035779372581502372
 MonoBehaviour:
   m_ObjectHideFlags: 0
