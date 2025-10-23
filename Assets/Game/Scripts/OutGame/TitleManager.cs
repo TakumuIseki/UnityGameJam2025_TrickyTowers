@@ -17,7 +17,8 @@ public class TitleManager : MonoBehaviour
             // ゲーム終了
             Application.Quit();
         }
-        else if (Input.anyKeyDown)
+        // Aボタンで次のシーンに進む
+        else if (Input.GetKeyDown(KeyCode.A))
         {
             // プレイヤー登録シーンへ遷移
             SceneManager.LoadScene(SceneNameConst.RegisterPlayerSceneName);

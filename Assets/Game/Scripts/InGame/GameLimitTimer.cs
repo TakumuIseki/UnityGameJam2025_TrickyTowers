@@ -1,10 +1,10 @@
 ﻿/// <summary>
-/// 制限時間の計算と表示を管理するスクリプト。
+/// 制限時間タイマー
 /// </summary>
 using TMPro;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class GameLimitTimer : MonoBehaviour
 {
     [Header("タイマーTextMesh"), SerializeField]
     private TextMeshProUGUI timerText_;
@@ -32,6 +32,6 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
         // 残り時間を表示。
-        timerText_.text = $"TIME: {(int)currentTime_}";
+        timerText_.text = $"{(int)currentTime_}";
     }
 }
