@@ -30,7 +30,7 @@ public class TowerHeightCalculatorComponent : MonoBehaviour
         CalcMaxHeightOfAllTetriminos();
 
         // 高さを表示。
-        heightText_.text = $"height: {(int)globalMaxY_}";
+        heightText_.text = $"たかさ : {(int)globalMaxY_}";
     }
 
     /// <summary>
