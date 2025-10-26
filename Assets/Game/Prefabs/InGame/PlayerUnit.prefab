@@ -143,7 +143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2632764993413214196}
-  - component: {fileID: 302945723543048016}
+  - component: {fileID: 5629194327605143583}
   m_Layer: 0
   m_Name: TetriminoSpawnPoint
   m_TagString: Untagged
@@ -166,7 +166,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5689152045567153099}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &302945723543048016
+--- !u!114 &5629194327605143583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,21 +175,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 826740033672388580}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c0b1f19a57302741a328b67529eb9a9, type: 3}
+  m_Script: {fileID: 11500000, guid: da357b0f924e14aa198ec56aa2e3505a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tetriminos_:
+  minos_:
+  - {fileID: 3345584176394373643, guid: c0bdcd2d30047404a873f953739a7ba1, type: 3}
   - {fileID: 7416965475333134071, guid: 698aaf0a570e41245b834e6e3e11545b, type: 3}
   - {fileID: 7220684335430710155, guid: 5da376a6214b08d47b934ad52ad789af, type: 3}
+  - {fileID: 3345584176394373643, guid: a8daf6ed348dc420da0341671642ff6c, type: 3}
   - {fileID: 2567443034512612672, guid: 794612f9fec50694aa4a3dc43ca983b5, type: 3}
   - {fileID: 1239390474266883165, guid: 41c0176b9e422574bb5c98de42523c8b, type: 3}
   - {fileID: 1906240304506388834, guid: 9f17d61d104e7bf4688dc208054adf73, type: 3}
   - {fileID: 4586487290329178538, guid: 8aafce9476f8c1e458d77921a9ff868e, type: 3}
-  - {fileID: 3345584176394373643, guid: c0bdcd2d30047404a873f953739a7ba1, type: 3}
-  - {fileID: 3345584176394373643, guid: c0bdcd2d30047404a873f953739a7ba1, type: 3}
-  - {fileID: 3345584176394373643, guid: a8daf6ed348dc420da0341671642ff6c, type: 3}
-  - {fileID: 3345584176394373643, guid: a8daf6ed348dc420da0341671642ff6c, type: 3}
-  controlledTetrimino_: {fileID: 0}
+  nextMinoViewPointTransform_: {fileID: 8295646121648992649}
+  player_: {fileID: 6787971562695432126}
 --- !u!1 &2252695997856568653
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +248,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heightText_: {fileID: 8670620366527024723}
+  player_: {fileID: 5689152045567153099}
+  cartHeight_: {fileID: 7878626435604732653}
 --- !u!114 &8670620366527024723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,9 +424,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5689152045567153099}
   - component: {fileID: 8417948233687195923}
-  - component: {fileID: 5131762068071372571}
-  - component: {fileID: 5164304230168954797}
-  - component: {fileID: 7148218205661880543}
+  - component: {fileID: 6787971562695432126}
+  - component: {fileID: 8974039376930147}
   m_Layer: 0
   m_Name: PlayerUnit
   m_TagString: Untagged
@@ -464,7 +464,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5104262004936203629}
   m_CullTransparentMesh: 1
---- !u!114 &5131762068071372571
+--- !u!114 &6787971562695432126
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -473,10 +473,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5104262004936203629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d0fc4823721734fa7455b5a13d2693, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e48b3e72353b42e6997f6663c42623a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5164304230168954797
+  playerNum_: 0
+  spawnerMino_: {fileID: 5629194327605143583}
+--- !u!114 &8974039376930147
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -485,51 +487,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5104262004936203629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cff02fce98a071f4eaa04ac7d3d196a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b7784713fa864f9ca5a4c048a3d594f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerType: 0
-  positionSettings_:
-  - childName: Cart
-    localPosition: {x: 0, y: -200}
-  - childName: TetriminoSpawnPoint
-    localPosition: {x: 0, y: 200}
-  - childName: NextTetriminoViewPoint
-    localPosition: {x: 0, y: 400}
-  - childName: Height
-    localPosition: {x: -200, y: 0}
-  - childName: Character
-    localPosition: {x: 200, y: 0}
---- !u!114 &7148218205661880543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5104262004936203629}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  otherPlayerUnits_: []
 --- !u!1 &5610362399434437306
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +752,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6596566274008341480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b34a4ea8de6a8d4e82eae79c01ca3b6, type: 3}
+  m_Script: {fileID: 11500000, guid: ca467b766c16349438dc530778092d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   collider_: {fileID: 6252895053730415034}

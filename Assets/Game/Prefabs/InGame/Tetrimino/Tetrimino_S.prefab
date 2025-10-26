@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9017600044204710495}
-  - component: {fileID: 5761726237780245858}
-  - component: {fileID: 2572986820482860429}
+  - component: {fileID: -7671046383572718887}
+  - component: {fileID: -737744958033083058}
   - component: {fileID: 8219749055904916685}
   - component: {fileID: 7730858765895073587}
   - component: {fileID: 5982050083183474216}
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 3408982245990185857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5761726237780245858
+--- !u!114 &-7671046383572718887
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,10 +47,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1239390474266883165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fa7ff4d53f6e6c4fb3473eeddac1487, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ad1f9b6139c54d4ebc4efe02c4dfc54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2572986820482860429
+  rigidBody_: {fileID: 4349444267114977419, guid: 698aaf0a570e41245b834e6e3e11545b, type: 3}
+  towerTag_: Tower
+--- !u!114 &-737744958033083058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,10 +61,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1239390474266883165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d5c14c8c30987740bd0887018ad7b7f, type: 3}
+  m_Script: {fileID: 11500000, guid: ac4f5dff690314a5dbee9f11f772563e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody_: {fileID: 7730858765895073587}
   tagToAssign_: Tower
 --- !u!114 &8219749055904916685
 MonoBehaviour:
@@ -105,7 +106,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &5982050083183474216
 SpriteRenderer:
   m_ObjectHideFlags: 0

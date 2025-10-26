@@ -1,15 +1,18 @@
-﻿/// <summary>
-/// カートの上面の高さを算出するスクリプト。
-/// </summary>
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CartHeightCalculatorComponent : MonoBehaviour
+/// <summary>
+/// カートの上面の高さを算出
+/// </summary>
+public class CalcCartHeight : MonoBehaviour
 {
     [Header("当たり判定"),SerializeField]
     private Collider2D collider_;
 
-    public float TopY { get; private set; } = 0f;    // カートの最も高い頂点のy座標を格納する。
+    public float TopY { get; private set; }    // カートの最も高い頂点のy座標を格納する。
 
+    /// <summary>
+    /// Start
+    /// </summary>
     private void Start()
     {
         StartCoroutine(InitAfterPhysics());

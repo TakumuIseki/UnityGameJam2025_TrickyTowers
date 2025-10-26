@@ -1,39 +1,45 @@
-﻿/// <summary>
-/// 制限時間タイマー
-/// </summary>
+﻿using System;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 制限時間タイマー
+/// </summary>
 public class GameLimitTimer : MonoBehaviour
 {
     [Header("タイマーTextMesh"), SerializeField]
-    private TextMeshProUGUI timerText_;
+    private TextMeshProUGUI text_;
 
     [Header("制限時間"), SerializeField]
-    private float maxTime_ = 60.0f;
+    private int maxTime_ = 60;
 
-    private float currentTime_ = 0.0f; // 残り時間を格納する変数。
-
-    void Start()
+    /// <summary>
+    /// Start
+    /// </summary>
+    private void Start()
     {
-        // 残り時間に制限時間を代入。
-        currentTime_ = maxTime_;
+        SetText(maxTime_);
     }
 
-    void Update()
+    /// <summary>
+    /// 制限時間の計測タスク
+    /// </summary>
+    /// <returns></returns>
+    public async UniTask MeasureLimitTimeTask()
     {
-        // 経過時間に応じて残り時間を算出。
-        currentTime_ -= Time.deltaTime;
-
-        if (currentTime_ < 0.0f)
+        for(var time = maxTime_;time >= 0; time--)
         {
-            // リザルトへ遷移
-            // TODO:iseki 今は即時遷移...
-            SceneManager.LoadScene("RankingScene");
+            SetText(time);
+            await UniTask.Delay(TimeSpan.FromSeconds(1));
         }
+    }
 
-        // 残り時間を表示。
-        timerText_.text = $"{(int)currentTime_}";
+    /// <summary>
+    /// テキスト設定
+    /// </summary>
+    private void SetText(int time)
+    {
+        text_.text = $"{time}";
     }
 }

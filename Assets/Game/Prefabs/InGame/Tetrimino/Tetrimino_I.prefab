@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7476259456664592555}
-  - component: {fileID: -6866063908091577563}
-  - component: {fileID: 180910979509574943}
+  - component: {fileID: 4921110951421835490}
+  - component: {fileID: -6857005380560855614}
   - component: {fileID: 8494470171444446077}
   - component: {fileID: 4349444267114977419}
   - component: {fileID: 932168779561529063}
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 364976136495763348}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6866063908091577563
+--- !u!114 &4921110951421835490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,22 +47,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 7416965475333134071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fa7ff4d53f6e6c4fb3473eeddac1487, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &180910979509574943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7416965475333134071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d5c14c8c30987740bd0887018ad7b7f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ad1f9b6139c54d4ebc4efe02c4dfc54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody_: {fileID: 4349444267114977419}
+  towerTag_: Tower
+--- !u!114 &-6857005380560855614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7416965475333134071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4f5dff690314a5dbee9f11f772563e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   tagToAssign_: Tower
 --- !u!114 &8494470171444446077
 MonoBehaviour:
@@ -91,7 +92,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1625.6
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -105,7 +106,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &932168779561529063
 SpriteRenderer:
   m_ObjectHideFlags: 0
