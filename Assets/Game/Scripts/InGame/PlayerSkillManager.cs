@@ -35,11 +35,6 @@ public class PlayerSkillManager : MonoBehaviour
     private int myRank_ = 1;
 
     /// <summary>
-    /// スキルのUIキャンバス
-    /// </summary>
-    private Transform uiCanvas_;
-
-    /// <summary>
     /// 子のスポナー
     /// </summary>
     private SpawnMino tetriminoSpawner_;
@@ -53,17 +48,6 @@ public class PlayerSkillManager : MonoBehaviour
     /// 無敵スキルの持続時間
     /// </summary>
     private float invincibleTimer_ = 0.0f;
-
-    /// <summary>
-    /// Start
-    /// </summary>
-    void Start()
-    {
-        // 子のUI用Canvasを探す
-        uiCanvas_ = transform.Find("Canvas");
-        // UIは非表示にしておく。
-        uiCanvas_.gameObject.SetActive(false);
-    }
 
     /// <summary>
     /// Update
@@ -88,9 +72,6 @@ public class PlayerSkillManager : MonoBehaviour
     /// </summary>
     private void ActiveSkill()
     {
-        // UIを表示する。
-        uiCanvas_.gameObject.SetActive(true);
-
         // 特定のキー入力で特定のスキルを発動する。
         UseSkill(Input.GetKeyDown(KeyCode.Keypad2), CallBindSkill);
         UseSkill(Input.GetKeyDown(KeyCode.Keypad6), InvincibleSkill);
@@ -112,9 +93,6 @@ public class PlayerSkillManager : MonoBehaviour
 
             // ポイントを初期化。
             currentSkillPoint_ = 0.0f;
-
-            // UIを非表示にする。
-            uiCanvas_.gameObject.SetActive(false);
         }
     }
 

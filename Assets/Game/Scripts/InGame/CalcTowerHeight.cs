@@ -31,7 +31,7 @@ public class CalcTowerHeight : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        // minosがnullにならないよう最初に呼び出す。
+        // minosがnullにならないよう最初に呼び出す
         FindMinosWithTag();
     }
 
@@ -40,6 +40,7 @@ public class CalcTowerHeight : MonoBehaviour
     /// </summary>
     void Update()
     {
+        FindMinosWithTag();
         CalcMaxHeightOfAllMinos();
 
         // 高さを表示。
@@ -51,13 +52,13 @@ public class CalcTowerHeight : MonoBehaviour
     /// </summary>
     public void FindMinosWithTag()
     {
-        // 同じPlayerUnitに属する全てのオブジェクトを取得。
+        // 同じプレイヤーに属する全てのオブジェクトを取得
         var allChildren = player_.GetComponentsInChildren<Transform>(true);
 
         // ミノのリストを作成
         var localMinos = new List<GameObject>();
 
-        // タワータグのついたオブジェクトをリストに追加。
+        // タワータグのついたオブジェクトをリストに追加
         foreach (var child in allChildren)
         {
             if (child.CompareTag("Tower"))
@@ -66,7 +67,7 @@ public class CalcTowerHeight : MonoBehaviour
             }
         }
 
-        // リストを配列に変換。
+        // リストを配列に変換
         minos_ = localMinos.ToArray();
     }
 
@@ -78,7 +79,7 @@ public class CalcTowerHeight : MonoBehaviour
         // 初期化
         globalMaxY_ = 0f;
 
-        foreach (GameObject mino in minos_)
+        foreach (var mino in minos_)
         {
             if (!mino)
             {
@@ -89,7 +90,8 @@ public class CalcTowerHeight : MonoBehaviour
             var minoHeight = mino.GetComponent<CalcMinoHeight>();
 
             // カート基準でミノの高さを算出
-            float topY = minoHeight.TopY - cartHeight_.TopY;
+            //float topY = minoHeight.TopY - cartHeight_.TopY;
+            float topY = minoHeight.TopY;
 
             // 今の最高高度を上回ったら上書き。
             globalMaxY_ = Mathf.Max(globalMaxY_, topY);

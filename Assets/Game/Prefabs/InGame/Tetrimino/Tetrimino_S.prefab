@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7730858765895073587}
   - component: {fileID: 5982050083183474216}
   - component: {fileID: 1074620388492986408}
+  - component: {fileID: -6057898787764519880}
   m_Layer: 0
   m_Name: Tetrimino_S
   m_TagString: Untagged
@@ -214,6 +215,18 @@ PolygonCollider2D:
       - {x: 3.728328, y: 0.11411174}
       - {x: 3.77, y: 2.5}
   m_UseDelaunayMesh: 0
+--- !u!114 &-6057898787764519880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239390474266883165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020ea31768f7943f09f418c6f1d4045e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8970199337254069759
 GameObject:
   m_ObjectHideFlags: 0

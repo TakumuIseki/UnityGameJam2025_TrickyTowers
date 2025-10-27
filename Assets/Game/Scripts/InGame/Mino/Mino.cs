@@ -29,6 +29,7 @@ public class Mino : MonoBehaviour
         // Stateを初期化
         _context = new MinoStateContext();
         _context.Init(MinoState.Wait, this, transform, rigidBody_, towerTag_);
+        transform.rotation = Quaternion.identity;
     }
 
     /// <summary>

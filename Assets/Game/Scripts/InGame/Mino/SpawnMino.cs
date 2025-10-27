@@ -11,7 +11,7 @@ public class SpawnMino : MonoBehaviour
     [Header("次に生成するミノの表示位置Transform"),SerializeField]
     private Transform nextMinoViewPointTransform_;
 
-    [Header("プレイヤー"),SerializeField]
+    [Header("プレイヤー"), SerializeField]
     private Player player_;
 
     /// <summary>

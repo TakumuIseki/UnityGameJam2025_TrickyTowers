@@ -23,7 +23,7 @@ public class CalcMinoHeight : MonoBehaviour
     /// </summary>
     private void CalcMinoTopY()
     {
-        // 初期化。
+        // 初期化
         TopY = 0f;
 
         // 積まれているミノを全て調べる

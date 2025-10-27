@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [Header("プレイヤー番号"),SerializeField]
     private int playerNum_;
 
-    [Header("スポナー"),SerializeField]
+    [Header("スポナー"), SerializeField]
     private SpawnMino spawnerMino_;
 
     /// <summary>
@@ -70,23 +70,5 @@ public class Player : MonoBehaviour
         {
             currentMino_ = null;
         }
-    }
-
-    /// <summary>
-    /// 現在操作中のミノを取得
-    /// </summary>
-    /// <returns>現在のミノ</returns>
-    public Mino GetCurrentMino()
-    {
-        return currentMino_;
-    }
-
-    /// <summary>
-    /// ミノリストを取得
-    /// </summary>
-    /// <returns>ミノのリスト</returns>
-    public List<Mino> GetMinoList()
-    {
-        return minoList_;
     }
 }

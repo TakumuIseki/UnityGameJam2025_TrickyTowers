@@ -57,9 +57,6 @@ public class MinoStateTower : IMinoState
         // タワータグを付与する
         _mino.gameObject.tag = towerTag_;
 
-        // Towerタグを持ったテトリミノのリストを更新。
-        //calcTowerHeight_.FindTetriminosWithTagTower();
-
         // 新しいミノをスポーン
         _mino.SpawnNewMino();
         // その次のミノを表示
