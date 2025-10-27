@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad1f9b6139c54d4ebc4efe02c4dfc54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody_: {fileID: 4349444267114977419, guid: 698aaf0a570e41245b834e6e3e11545b, type: 3}
+  rigidBody_: {fileID: 7730858765895073587}
   towerTag_: Tower
 --- !u!114 &-737744958033083058
 MonoBehaviour:
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!212 &5982050083183474216
 SpriteRenderer:
   m_ObjectHideFlags: 0
