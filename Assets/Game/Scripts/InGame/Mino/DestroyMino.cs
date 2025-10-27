@@ -62,7 +62,8 @@ public class DestroyMino : MonoBehaviour
     private void Destroy()
     {
         // プレイヤーのリストからミノを削除
-        player_.RemoveMino(GetComponent<Mino>());
+        var mino = GetComponent<Mino>();
+        player_.RemoveMino(mino);
 
         // テトリミノにタワータグが付いていたら
         if (gameObject.tag == tagToAssign_)

@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         var initSpawnMino = spawnerMino_.InitSpawn();
         initSpawnMino.SetSpawner(spawnerMino_);
         AddMino(initSpawnMino);
-        
+
         // 次のミノを表示（操作対象ではない）
         var nextSpawnMino = spawnerMino_.ViewNextMino();
         nextSpawnMino.SetSpawner(spawnerMino_);
@@ -45,17 +45,6 @@ public class Player : MonoBehaviour
     {
         // 落下操作ステートに変更
         currentMino_.ControlFallState();
-    }
-
-    /// <summary>
-    /// 次のミノをスポーン
-    /// </summary>
-    private void SpawnNextMino()
-    {
-        var spawnMino = spawnerMino_.Spawn();
-        spawnMino.SetSpawner(spawnerMino_);
-        var nextSpawnMino = spawnerMino_.ViewNextMino();
-        nextSpawnMino.SetSpawner(spawnerMino_);
     }
 
     /// <summary>
@@ -81,5 +70,23 @@ public class Player : MonoBehaviour
         {
             currentMino_ = null;
         }
+    }
+
+    /// <summary>
+    /// 現在操作中のミノを取得
+    /// </summary>
+    /// <returns>現在のミノ</returns>
+    public Mino GetCurrentMino()
+    {
+        return currentMino_;
+    }
+
+    /// <summary>
+    /// ミノリストを取得
+    /// </summary>
+    /// <returns>ミノのリスト</returns>
+    public List<Mino> GetMinoList()
+    {
+        return minoList_;
     }
 }

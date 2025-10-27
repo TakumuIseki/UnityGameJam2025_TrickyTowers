@@ -50,9 +50,6 @@ public class MinoStateTower : IMinoState
         //{
         //    BindWithTower(collision.gameObject);
         //}
-        
-        // 回転固定を外す
-        rigidbody_.freezeRotation = false;
 
         // 重力を設定
         rigidbody_.gravityScale = GRAVITY;
@@ -63,8 +60,10 @@ public class MinoStateTower : IMinoState
         // Towerタグを持ったテトリミノのリストを更新。
         //calcTowerHeight_.FindTetriminosWithTagTower();
 
-        // 次のテトリミノをスポーン
-        _mino.SpawnMino();
+        // 新しいミノをスポーン
+        _mino.SpawnNewMino();
+        // その次のミノを表示
+        _mino.ViewNextMino();
     }
 
     /// <summary>

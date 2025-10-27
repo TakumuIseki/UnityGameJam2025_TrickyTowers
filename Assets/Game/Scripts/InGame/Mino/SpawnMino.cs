@@ -32,7 +32,10 @@ public class SpawnMino : MonoBehaviour
             transform
         );
 
-        return firstMino.GetComponent<Mino>();
+        var mino = firstMino.GetComponent<Mino>();
+        mino.SetSpawner(this);
+
+        return mino;
     }
 
     /// <summary>
@@ -47,10 +50,13 @@ public class SpawnMino : MonoBehaviour
         nextMino_.transform.SetParent(transform);
 
         var mino = nextMino_.GetComponent<Mino>();
+        mino.ControlFallState();
+        mino.SetSpawner(this);
+
         // 新しいミノを追加
         player_.AddMino(mino);
 
-        return nextMino_.GetComponent<Mino>();
+        return mino;
     }
 
     /// <summary>
@@ -67,6 +73,9 @@ public class SpawnMino : MonoBehaviour
             nextMinoViewPointTransform_
         );
 
-        return nextMino_.GetComponent<Mino>();
+        var mino = nextMino_.GetComponent<Mino>();
+        mino.SetSpawner(this);
+
+        return mino;
     }
 }

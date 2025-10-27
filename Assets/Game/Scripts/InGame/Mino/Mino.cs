@@ -8,7 +8,7 @@ public class Mino : MonoBehaviour
     [Header("自身のRigidBody2D"), SerializeField]
     private Rigidbody2D rigidBody_;
 
-    [Header("ミノがタワーの一部になった時のタグ"),SerializeField]
+    [Header("ミノがタワーの一部になった時のタグ"), SerializeField]
     private string towerTag_ = "Tower";
 
     /// <summary>
@@ -28,7 +28,7 @@ public class Mino : MonoBehaviour
     {
         // Stateを初期化
         _context = new MinoStateContext();
-        _context.Init(MinoState.Wait,this,transform,rigidBody_,towerTag_);
+        _context.Init(MinoState.Wait, this, transform, rigidBody_, towerTag_);
     }
 
     /// <summary>
@@ -45,9 +45,17 @@ public class Mino : MonoBehaviour
         {
             return;
         }
-        
+
         // ステートに衝突を通知
         _context.OnCollisionEnter2D(collision);
+    }
+
+    /// <summary>
+    /// スポナーを設定
+    /// </summary>
+    public void SetSpawner(SpawnMino spawnMino)
+    {
+        spawnMino_ = spawnMino;
     }
 
     /// <summary>
@@ -66,19 +74,18 @@ public class Mino : MonoBehaviour
     public void TowerState() => _context.ChangeState(MinoState.Tower);
 
     /// <summary>
-    /// スポナー設定
+    /// 新しいミノをスポーン
     /// </summary>
-    public void SetSpawner(SpawnMino spawnMino)
+    public void SpawnNewMino()
     {
-        spawnMino_ = spawnMino;
+        spawnMino_.Spawn();
     }
 
     /// <summary>
-    /// ミノをスポーン
+    /// 次のミノを表示
     /// </summary>
-    public void SpawnMino()
+    public void ViewNextMino()
     {
-        spawnMino_.Spawn();
         spawnMino_.ViewNextMino();
     }
 }

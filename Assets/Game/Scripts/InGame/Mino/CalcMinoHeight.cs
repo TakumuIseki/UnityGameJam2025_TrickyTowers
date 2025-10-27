@@ -1,8 +1,8 @@
-﻿/// <summary>
+﻿using UnityEngine;
+
+/// <summary>
 /// ミノの最も高い頂点のy座標を算出
 /// </summary>
-using UnityEngine;
-
 public class CalcMinoHeight : MonoBehaviour
 {
     /// <summary>

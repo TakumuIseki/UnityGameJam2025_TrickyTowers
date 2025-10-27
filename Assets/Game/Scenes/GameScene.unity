@@ -859,6 +859,10 @@ PrefabInstance:
       propertyPath: m_VertexColorAlwaysGammaSpace
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4793644053952966661, guid: a681ce5085adc9042aab033039bd2f9c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5104262004936203629, guid: a681ce5085adc9042aab033039bd2f9c, type: 3}
       propertyPath: m_Name
       value: PlayerUnit3

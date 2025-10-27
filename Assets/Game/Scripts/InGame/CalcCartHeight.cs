@@ -8,7 +8,10 @@ public class CalcCartHeight : MonoBehaviour
     [Header("当たり判定"),SerializeField]
     private Collider2D collider_;
 
-    public float TopY { get; private set; }    // カートの最も高い頂点のy座標を格納する。
+    /// <summary>
+    /// カートの最も高い頂点のY座標
+    /// </summary>
+    public float TopY { get; private set; }
 
     /// <summary>
     /// Start
