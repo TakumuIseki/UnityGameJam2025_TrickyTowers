@@ -15,14 +15,13 @@ public class CalcRideTowerNum : MonoBehaviour
     /// <summary>
     /// 乗っているタワーの数
     /// </summary>
-    int rideTowerNum_;
+    public int RideTowerNum { get; private set; } = 0;
 
     /// <summary>
     /// Update
     /// </summary>
     void Update()
     {
-        rideTowerNum_ = 0;
         rideTowerNumText_.text = $"{GetRideTowerMinosNum()}こ";
     }
 
@@ -31,17 +30,19 @@ public class CalcRideTowerNum : MonoBehaviour
     /// </summary>
     public int GetRideTowerMinosNum()
     {
+        RideTowerNum = 0;
+
         // タワータグのついたオブジェクトの総数をカウント
         for (var i = 0; i < parentObject_.transform.childCount; i++)
         {
             var child = parentObject_.transform.GetChild(i);
             if (child.CompareTag("Tower"))
             {
-                rideTowerNum_++;
+                RideTowerNum++;
             }
         }
 
         // ミノの数を出力
-        return rideTowerNum_;
+        return RideTowerNum;
     }
 }
