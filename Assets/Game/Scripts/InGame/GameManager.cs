@@ -10,17 +10,45 @@ public class GameManager : MonoBehaviour
     [Header("カウントダウン"),SerializeField]
     private CountDown countDown_;
 
-    [Header("制限時間タイマー"),SerializeField]
+    [Header("制限時間タイマー"), SerializeField]
     private GameLimitTimer gameLimitTimer_;
 
-    [Header("プレイヤーユニットたち"),SerializeField]
-    private Player[] players_;
+    // TODO: プレイヤー数はプレイヤー登録シーンで決定された人数を使う
+    [Header("参加プレイヤー数"), SerializeField]
+    private int joinPlayerCount = 2;
+
+    [Header("プレイヤープレハブ"), SerializeField]
+    private GameObject playerPrefab_;
+
+    [Header("プレイヤールートオブジェクト"), SerializeField]
+    private Transform playerRootObj_;
+
+    /// <summary>
+    /// 参加プレイヤーたち
+    /// </summary>
+    private GameObject[] joinPlayers_;
 
     /// <summary>
     /// Start
     /// </summary>
     private void Start()
     {
+        // 参加プレイヤー配列初期化
+        joinPlayers_ = new GameObject[joinPlayerCount];
+
+        // プレイヤー生成
+        for(var i = 0; i < joinPlayerCount; i++)
+        {
+            joinPlayers_[i] = Instantiate(
+                playerPrefab_,
+                Vector3.zero,
+                Quaternion.identity,
+                // 親をプレイヤールートオブジェクトに設定
+                playerRootObj_
+            );
+            joinPlayers_[i].name = $"Player{i + 1}";
+        }
+
         GameFlowTask().Forget();
     }
 
@@ -38,8 +66,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("ゲーム開始");
 
         // 待機ステート→落下操作ステートに切り替え
-        foreach (var player in players_)
+        for(var i = 0; i < joinPlayerCount; i++)
         {
+            var player = joinPlayers_[i].GetComponent<Player>();
             player.StartControlFall();
         }
 

@@ -2,9 +2,9 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// タワーに乗っているミノの数を算出
+/// タワーに乗っているミノの数を表示
 /// </summary>
-public class CalcRideTowerNum : MonoBehaviour
+public class DisplayRideTowerNum : MonoBehaviour
 {
     [Header("乗っているタワー数表示UI"), SerializeField]
     TextMeshProUGUI rideTowerNumText_;
@@ -22,13 +22,13 @@ public class CalcRideTowerNum : MonoBehaviour
     /// </summary>
     void Update()
     {
-        rideTowerNumText_.text = $"{GetRideTowerMinosNum()}こ";
+        rideTowerNumText_.text = $"{CalcRideTowerNum()}こ";
     }
 
     /// <summary>
-    /// カートに乗っているミノの数を取得
+    /// カートに乗っているミノの数を算出
     /// </summary>
-    public int GetRideTowerMinosNum()
+    public int CalcRideTowerNum()
     {
         RideTowerNum = 0;
 

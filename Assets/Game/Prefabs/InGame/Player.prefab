@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6042056224439510017}
+  - component: {fileID: 2272430591234296578}
   - component: {fileID: 427244973862937412}
   - component: {fileID: 661326080322464246}
   m_Layer: 5
@@ -37,6 +38,20 @@ RectTransform:
   m_AnchoredPosition: {x: 90, y: -85}
   m_SizeDelta: {x: 80, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2272430591234296578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461782162657856560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1191d363c5a1344c9bba1dea8a74a381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rankingText_: {fileID: 661326080322464246}
+  displayRideTowerNum_: {fileID: 5809345407103129753}
 --- !u!222 &427244973862937412
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -160,7 +175,7 @@ Transform:
   m_GameObject: {fileID: 826740033672388580}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 400, z: 0}
+  m_LocalPosition: {x: 0, y: 950, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -425,8 +440,9 @@ GameObject:
   - component: {fileID: 8417948233687195923}
   - component: {fileID: 6787971562695432126}
   - component: {fileID: 8974039376930147}
+  - component: {fileID: 2595352797511107633}
   m_Layer: 0
-  m_Name: PlayerUnit
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -475,7 +491,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e48b3e72353b42e6997f6663c42623a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum_: 0
   spawnerMino_: {fileID: 5629194327605143583}
 --- !u!114 &8974039376930147
 MonoBehaviour:
@@ -489,7 +504,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b7784713fa864f9ca5a4c048a3d594f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherPlayers_: []
+--- !u!114 &2595352797511107633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5104262004936203629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: f2b741bfa1a554113827ee871665a2bc, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &5610362399434437306
 GameObject:
   m_ObjectHideFlags: 0

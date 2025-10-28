@@ -6,9 +6,6 @@ using UnityEngine;
 /// </summary>
 public class Player : MonoBehaviour
 {
-    [Header("プレイヤー番号"),SerializeField]
-    private int playerNum_;
-
     [Header("スポナー"), SerializeField]
     private SpawnMino spawnerMino_;
 

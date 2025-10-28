@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// タワーの積み上げた高さを計算し表示
 /// </summary>
-public class CalcTowerHeight : MonoBehaviour
+public class DisplayTowerHeight : MonoBehaviour
 {
     [Header("高さ表示UI"),SerializeField]
     private TextMeshProUGUI heightText_;

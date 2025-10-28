@@ -21,9 +21,6 @@ public class PlayerSkillManager : MonoBehaviour
     /// </summary>
     private static readonly float SCALE_UP_RATIO = 2.0f;
 
-    [Header("他プレイヤー"),SerializeField]
-    private GameObject[] otherPlayers_;
-
     /// <summary>
     /// 現在のスキルポイント
     /// </summary>
@@ -145,33 +142,33 @@ public class PlayerSkillManager : MonoBehaviour
     /// <param name="skill"> 実行するスキル。</param>
     private void ForEachOtherPlayerTetrimino()//Action<TetriminoControllerComponent> skill)
     {
-        foreach (var unit in otherPlayers_)
-        {
-            // 他のプレイヤーユニットのSkillManagerComponentを取得。
-            var otherSkillManager = unit.GetComponentInChildren<PlayerSkillManager>();
-            if (otherSkillManager == null)
-            {
-                Debug.LogWarning("SkillManagerComponent が見つかりませんでした。");
-                continue;
-            }
+        // foreach (var unit in otherPlayers_)
+        // {
+        //     // 他のプレイヤーユニットのSkillManagerComponentを取得。
+        //     var otherSkillManager = unit.GetComponentInChildren<PlayerSkillManager>();
+        //     if (otherSkillManager == null)
+        //     {
+        //         Debug.LogWarning("SkillManagerComponent が見つかりませんでした。");
+        //         continue;
+        //     }
 
-            // 他のプレイヤーが無敵スキルを使っていたらスキルを発動しない。
-            if (otherSkillManager.isInvincibleSkill_)
-            {
-                continue;
-            }
+        //     // 他のプレイヤーが無敵スキルを使っていたらスキルを発動しない。
+        //     if (otherSkillManager.isInvincibleSkill_)
+        //     {
+        //         continue;
+        //     }
 
-            // 他のプレイヤーの操作中のテトリミノを取得。
-            otherSkillManager.GetControlledTetrimino();
-            //var tetrimino = otherSkillManager.skillTargetTetrimino_;
-            //if (tetrimino == null)
-            //{
-            //    Debug.LogWarning("skillTargetTetrimino_ が null です。");
-            //    continue;
-            //}
+        //     // 他のプレイヤーの操作中のテトリミノを取得。
+        //     otherSkillManager.GetControlledTetrimino();
+        //     //var tetrimino = otherSkillManager.skillTargetTetrimino_;
+        //     //if (tetrimino == null)
+        //     //{
+        //     //    Debug.LogWarning("skillTargetTetrimino_ が null です。");
+        //     //    continue;
+        //     //}
 
-            //skill?.Invoke(tetrimino);
-        }
+        //     //skill?.Invoke(tetrimino);
+        // }
     }
 
     /// <summary>

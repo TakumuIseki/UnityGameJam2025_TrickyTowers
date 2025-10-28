@@ -8,9 +8,6 @@ public class Mino : MonoBehaviour
     [Header("自身のRigidBody2D"), SerializeField]
     private Rigidbody2D rigidBody_;
 
-    [Header("ミノがタワーの一部になった時のタグ"), SerializeField]
-    private string towerTag_ = "Tower";
-
     /// <summary>
     /// スポナー
     /// </summary>
@@ -28,7 +25,7 @@ public class Mino : MonoBehaviour
     {
         // Stateを初期化
         _context = new MinoStateContext();
-        _context.Init(MinoState.Wait, this, transform, rigidBody_, towerTag_);
+        _context.Init(MinoState.Wait, this, transform, rigidBody_, MinoConst.TOWER_TAG);
         transform.rotation = Quaternion.identity;
     }
 
