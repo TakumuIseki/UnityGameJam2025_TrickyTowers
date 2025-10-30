@@ -1,10 +1,10 @@
-﻿///
-/// コントローラー管理
-///
-using R3;
-using System.Linq;
+﻿using R3;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+/// <summary>
+/// コントローラー管理
+/// </summary>
 public class ControllerManager : MonoBehaviour
 {
     /// <summary>
@@ -18,27 +18,25 @@ public class ControllerManager : MonoBehaviour
     public Observable<int> ConnectedControllers => connectedControllerNum_.AsObservable();
 
     /// <summary>
-    /// オブジェクトがアクティブになったときに1度だけ呼び出される
-    /// </summary>
-    private void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
-    /// <summary>
     /// 更新
     /// </summary>
     private void Update()
     {
-        // コントローラーの接続状態を更新
-
-        var names = Input.GetJoystickNames();
-        var newJoysticks = names.Where(name => !string.IsNullOrEmpty(name)).ToList();
-
-        // 接続コントローラー数が変わった場合のみ更新通知
-        if (connectedControllerNum_.Value != newJoysticks.Count)
+        // デバイス一覧を取得
+        foreach (var device in InputSystem.devices)
         {
-            connectedControllerNum_.Value = newJoysticks.Count;
+            // コントローラー以外はスキップ
+            if (device is not Gamepad)
+            {
+                continue;
+            }
+            // デバイス名をログ出力
+            Debug.Log(device.name);
         }
+        // 接続されているゲームパッドの数をカウント
+        var gamepadCount = Gamepad.all.Count;
+        Debug.Log($"接続されているコントローラー数: {gamepadCount}");
+        // プロパティに反映
+        connectedControllerNum_.Value = gamepadCount;
     }
 }

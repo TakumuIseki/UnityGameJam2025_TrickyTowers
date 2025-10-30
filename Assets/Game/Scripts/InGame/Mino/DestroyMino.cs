@@ -6,31 +6,14 @@ using UnityEngine;
 public class DestroyMino : MonoBehaviour
 {
     /// <summary>
-    /// このY座標を下回ったら破棄
-    /// </summary>
-    private static readonly float DESTROY_Y_THRESHOLD = -620.0f;
-
-    [Header("付与するタグ"), SerializeField]
-    private string tagToAssign_ = "Tower";
-
-    /// <summary>
     /// 破棄するか
     /// </summary>
-    private bool _isDestroy => transform.position.y < DESTROY_Y_THRESHOLD;
+    private bool _isDestroy => transform.position.y < MinoConst.DESTROY_Y_THRESHOLD;
 
     /// <summary>
     /// プレイヤー
     /// </summary>
     private Player player_;
-
-    /// <summary>
-    /// Start
-    /// </summary>
-    private void Start()
-    {
-        // プレイヤーを取得
-        FindAndAssignPlayer();
-    }
 
     /// <summary>
     /// Update
@@ -63,10 +46,11 @@ public class DestroyMino : MonoBehaviour
     {
         // プレイヤーのリストからミノを削除
         var mino = GetComponent<Mino>();
+        FindAndAssignPlayer();
         player_.RemoveMino(mino);
 
         // テトリミノにタワータグが付いていたら
-        if (gameObject.tag == tagToAssign_)
+        if (gameObject.tag == MinoConst.TOWER_TAG)
         {
             // Towerタグを持ったテトリミノのリストを更新
             //calcTowerHeight_.FindTetriminosWithTagTower();

@@ -1,17 +1,17 @@
-﻿///
-/// コントローラー接続処理
-///
-using R3;
+﻿using R3;
 using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 
+/// <summary>
+/// コントローラー接続処理
+/// </summary>
 public class ConnectController : MonoBehaviour
 {
     [Header("プレイヤー番号"), SerializeField]
     private int playerNum_ = 0;
 
-    [Header("コントローラー接続画像"),SerializeField]
+    [Header("コントローラー接続画像"), SerializeField]
     private Sprite ConectControllerSprite;
 
     [Header("プレイヤー参加画像"), SerializeField]

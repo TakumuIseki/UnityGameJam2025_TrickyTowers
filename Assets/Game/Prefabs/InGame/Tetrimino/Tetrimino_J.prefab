@@ -136,7 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody_: {fileID: -2032918214980197080}
-  towerTag_: Tower
 --- !u!114 &-3948513992462911185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4f5dff690314a5dbee9f11f772563e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagToAssign_: Tower
 --- !u!114 &1395569843276066426
 MonoBehaviour:
   m_ObjectHideFlags: 0

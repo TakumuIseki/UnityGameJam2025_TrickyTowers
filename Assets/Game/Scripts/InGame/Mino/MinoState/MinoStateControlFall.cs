@@ -6,26 +6,6 @@ using UnityEngine;
 public class MinoStateControlFall : IMinoState
 {
     /// <summary>
-    /// 通常時の落下速度
-    /// </summary>
-    private static readonly float NORMAL_FALL_SPEED = 100.0f;
-
-    /// <summary>
-    /// 加速倍率
-    /// </summary>
-    private static readonly float SPEED_UP_MAGNIFICATION = 2.0f;
-
-    /// <summary>
-    /// 回転角度
-    /// </summary>
-    private static readonly Vector3 ROTATION_ANGLE = new Vector3(0.0f, 0.0f, 90.0f);
-
-    /// <summary>
-    /// 左右移動の幅
-    /// </summary>
-    private static readonly float MOVE_DISTANCE_PER_KEY = 10.0f;
-
-    /// <summary>
     /// ミノ
     /// </summary>
     Mino _mino;
@@ -68,7 +48,7 @@ public class MinoStateControlFall : IMinoState
     public void Update()
     {
         // 落下速度決定
-        var fallSpeed = Input.GetKey(KeyCode.DownArrow) ? NORMAL_FALL_SPEED * SPEED_UP_MAGNIFICATION : NORMAL_FALL_SPEED;
+        var fallSpeed = Input.GetKey(KeyCode.DownArrow) ?   MinoConst.NORMAL_FALL_SPEED * MinoConst.SPEED_UP_MAGNIFICATION : MinoConst.NORMAL_FALL_SPEED;
 
         // 時間によって位置を下げる
         _transform.position += Vector3.down * fallSpeed * Time.deltaTime;
@@ -99,7 +79,7 @@ public class MinoStateControlFall : IMinoState
     {
         if (getKeyDown)
         {
-            _transform.Translate(direction * MOVE_DISTANCE_PER_KEY, Space.World);
+            _transform.Translate(direction * MinoConst.MOVE_DISTANCE_PER_KEY, Space.World);
         }
     }
 
@@ -117,7 +97,7 @@ public class MinoStateControlFall : IMinoState
         // 上キーで90度回転。
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            _transform.Rotate(ROTATION_ANGLE);
+            _transform.Rotate(MinoConst.ROTATION_ANGLE);
         }
     }
 
