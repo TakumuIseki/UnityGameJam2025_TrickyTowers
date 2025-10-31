@@ -39,17 +39,4 @@ public class TitleManager : MonoBehaviour
         // 入力アクション無効化(アウトゲーム用マップのみ)
         playerInput_.OutGameScene.Disable();
     }
-
-    private void Update()
-    {
-        // 入力アクションの状態を更新
-        if (Gamepad.current == null)
-        {
-            Debug.Log("コントローラーが接続されていません");
-        }
-        else
-        {
-            Debug.Log("コントローラーが接続されています");
-        }
-    }
 }

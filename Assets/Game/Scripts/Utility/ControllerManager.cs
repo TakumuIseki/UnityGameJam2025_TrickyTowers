@@ -8,6 +8,11 @@ using UnityEngine.InputSystem;
 public class ControllerManager : MonoBehaviour
 {
     /// <summary>
+    /// プレイヤーのInputActions配列
+    /// </summary>
+    private InputActions[] inputActions_ = new InputActions[4];
+
+    /// <summary>
     /// 接続されているコントローラー数プロパティ
     /// </summary>
     private ReactiveProperty<int> connectedControllerNum_ = new ReactiveProperty<int>();
@@ -17,26 +22,36 @@ public class ControllerManager : MonoBehaviour
     /// </summary>
     public Observable<int> ConnectedControllers => connectedControllerNum_.AsObservable();
 
+    private void Awake()
+    {
+        // InputActionsの初期化
+        for (int i = 0; i < inputActions_.Length; i++)
+        {
+            inputActions_[i] = new InputActions();
+            inputActions_[i].Enable();
+        }
+    }
+
     /// <summary>
     /// 更新
     /// </summary>
     private void Update()
     {
         // デバイス一覧を取得
-        foreach (var device in InputSystem.devices)
-        {
-            // コントローラー以外はスキップ
-            if (device is not Gamepad)
-            {
-                continue;
-            }
-            // デバイス名をログ出力
-            Debug.Log(device.name);
-        }
         // 接続されているゲームパッドの数をカウント
         var gamepadCount = Gamepad.all.Count;
         Debug.Log($"接続されているコントローラー数: {gamepadCount}");
         // プロパティに反映
         connectedControllerNum_.Value = gamepadCount;
+    }
+
+    /// <summary>
+    /// プレイヤーごとのInputActionsを取得
+    /// </summary>
+    /// <param name="playerNum">プレイヤー番号</param>
+    /// <returns></returns>
+    public InputActions GetPlayerInput(int playerNum)
+    {
+        return inputActions_[playerNum-1];
     }
 }

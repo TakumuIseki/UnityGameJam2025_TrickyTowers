@@ -54,8 +54,10 @@ public class ConnectController : MonoBehaviour
     /// </summary>
     private async UniTask GoReadyTask()
     {
-        // Aボタンが押されるまで待機
-        await UniTask.WaitUntil(() => Input.GetKeyDown(KeyCode.JoystickButton0));
+        // プレイヤーのAボタンが押されるまで待機
+        await UniTask.WaitUntil(() => 
+            controllerManager_.GetPlayerInput(playerNum_).OutGameScene.A.WasPressedThisFrame()
+        );
 
         // プレイヤー準備完了状態
         ChangeColor(Color.yellow);
@@ -69,7 +71,9 @@ public class ConnectController : MonoBehaviour
     private async UniTask BackReadyTask()
     {
         // Bボタンが押されるまで待機
-        await UniTask.WaitUntil(() => Input.GetKeyDown(KeyCode.JoystickButton1));
+        await UniTask.WaitUntil(() => 
+            controllerManager_.GetPlayerInput(playerNum_).OutGameScene.B.WasPressedThisFrame()
+        );
 
         // プレイヤー準備中状態
         ChangeColor(Color.white);
