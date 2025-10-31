@@ -12,6 +12,11 @@ public class TitleManager : MonoBehaviour
     /// </summary>
     private InputActions playerInput_;
 
+    private void Start()
+    {
+        SoundManager.PlayBGM("BgmTitle");
+    }
+
     /// <summary>
     /// 有効化時
     /// </summary>
