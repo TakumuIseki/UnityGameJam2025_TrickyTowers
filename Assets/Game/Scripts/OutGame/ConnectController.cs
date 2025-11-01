@@ -1,7 +1,7 @@
-﻿using R3;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem.LowLevel;
 
 /// <summary>
 /// コントローラー接続処理
@@ -21,32 +21,21 @@ public class ConnectController : MonoBehaviour
     private Image RegisterPlayerImage;
 
     /// <summary>
-    /// コントローラー管理
+    /// 準備完了状態か
     /// </summary>
-    private ControllerManager controllerManager_;
+    public bool IsReady { get; private set; }
 
     /// <summary>
     /// オブジェクトがアクティブになったときに1度だけ呼び出される
     /// </summary>
     private void Start()
     {
-        controllerManager_ = FindObjectOfType<ControllerManager>();
-
-        // コントローラーの接続状況を監視
-        controllerManager_.ConnectedControllers.Subscribe(count =>
-            {
-                if (count >= playerNum_)
-                {
-                    RegisterPlayerImage.sprite = RegisterPlayerSprite;
-                    GoReadyTask().Forget();
-                }
-                else
-                {
-                    RegisterPlayerImage.sprite = ConectControllerSprite;
-                    ChangeColor(Color.white);
-                }
-            }
-        );
+        // コントローラー接続状態
+        ControllerManager.Instance.OnGamepadConnectionChanged += HandlePadChange;
+        ControllerManager.Instance.OnGamepadConnectionChanged += HandlePadChange;
+        // コントローラー未接続状態
+        RegisterPlayerImage.sprite = ConectControllerSprite;
+        ChangeColor(Color.white);
     }
 
     /// <summary>
@@ -55,13 +44,11 @@ public class ConnectController : MonoBehaviour
     private async UniTask GoReadyTask()
     {
         // プレイヤーのAボタンが押されるまで待機
-        await UniTask.WaitUntil(() => 
-            controllerManager_.GetPlayerInput(playerNum_).OutGameScene.A.WasPressedThisFrame()
-        );
+        await ControllerManager.Instance.WaitForButtonDownAsync(playerNum_,GamepadButton.A);
 
         // プレイヤー準備完了状態
         ChangeColor(Color.yellow);
-
+        IsReady = true;
         BackReadyTask().Forget();
     }
 
@@ -71,13 +58,11 @@ public class ConnectController : MonoBehaviour
     private async UniTask BackReadyTask()
     {
         // Bボタンが押されるまで待機
-        await UniTask.WaitUntil(() => 
-            controllerManager_.GetPlayerInput(playerNum_).OutGameScene.B.WasPressedThisFrame()
-        );
+        await ControllerManager.Instance.WaitForButtonDownAsync(playerNum_,GamepadButton.B);
 
         // プレイヤー準備中状態
         ChangeColor(Color.white);
-
+        IsReady = false;
         GoReadyTask().Forget();
     }
 
@@ -87,5 +72,14 @@ public class ConnectController : MonoBehaviour
     private void ChangeColor(Color color)
     {
         RegisterPlayerImage.color = color;
+    }
+
+    /// <summary>
+    /// コントローラー接続状態変更ハンドラー
+    /// </summary>
+    private void HandlePadChange(int playerNum,bool connected)
+    {
+        RegisterPlayerImage.sprite = RegisterPlayerSprite;
+        GoReadyTask().Forget();
     }
 }

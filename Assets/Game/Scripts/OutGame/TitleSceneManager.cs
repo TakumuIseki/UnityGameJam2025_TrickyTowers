@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// タイトルマネージャー
+/// タイトルシーンマネージャー
 /// </summary>
-public class TitleManager : MonoBehaviour
+public class TitleSceneManager : MonoBehaviour
 {
     /// <summary>
     /// プレイヤー入力
     /// </summary>
     private InputActions playerInput_;
 
+    /// <summary>
+    /// Start
+    /// </summary>
     private void Start()
     {
+        // タイトルBGM再生
         SoundManager.PlayBGM("BgmTitle");
     }
 
