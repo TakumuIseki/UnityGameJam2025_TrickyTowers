@@ -170,6 +170,20 @@ public class ControllerManager : MonoBehaviour
     }
 
     /// <summary>
+    /// InputDeviceを取得する
+    /// </summary>
+    public InputDevice TryGetInputDevice(int playerNum,out InputDevice device)
+    {
+        if(TryGetGamepad(playerNum,out var pad))
+        {
+            device = pad.device;
+            return device;
+        }
+        device = null;
+        return null;
+    }
+
+    /// <summary>
     /// 指定プレイヤー(1始まり)のボタンが「このフレームで押されたか」を非同期で待つ（キャンセル可）
     /// </summary>
     public async UniTask WaitForButtonDownAsync(int playerNum,GamepadButton button,CancellationToken ct = default)

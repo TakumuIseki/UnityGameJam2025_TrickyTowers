@@ -1,6 +1,8 @@
-﻿using UnityEngine;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 /// <summary>
 /// ゲームマネージャー
@@ -35,14 +37,13 @@ public class GameManager : MonoBehaviour
         // プレイヤー生成
         for(var i = 0; i < GameData.Instance.JoinPlayerCount; i++)
         {
-            joinPlayers_[i] = Instantiate(
-                playerPrefab_,
-                Vector3.zero,
-                Quaternion.identity,
-                // 親をプレイヤールートオブジェクトに設定
-                playerRootObj_
-            );
+            joinPlayers_[i] = PlayerInput.Instantiate(
+                playerIndex: i,
+                pairWithDevice: ControllerManager.Instance.TryGetInputDevice(i,out InputDevice device),
+                prefab: playerPrefab_
+                ).gameObject;
             joinPlayers_[i].name = $"Player{i + 1}";
+            joinPlayers_[i].transform.SetParent(playerRootObj_);
         }
 
         GameFlowTask().Forget();
