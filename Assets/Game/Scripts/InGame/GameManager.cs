@@ -1,6 +1,8 @@
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 /// <summary>
 /// ゲームマネージャー
@@ -10,17 +12,40 @@ public class GameManager : MonoBehaviour
     [Header("カウントダウン"),SerializeField]
     private CountDown countDown_;
 
-    [Header("制限時間タイマー"),SerializeField]
+    [Header("制限時間タイマー"), SerializeField]
     private GameLimitTimer gameLimitTimer_;
 
-    [Header("プレイヤーユニットたち"),SerializeField]
-    private Player[] players_;
+    [Header("プレイヤープレハブ"), SerializeField]
+    private GameObject playerPrefab_;
+
+    [Header("プレイヤールートオブジェクト"), SerializeField]
+    private Transform playerRootObj_;
+
+    /// <summary>
+    /// 参加プレイヤーたち
+    /// </summary>
+    private GameObject[] joinPlayers_;
 
     /// <summary>
     /// Start
     /// </summary>
     private void Start()
     {
+        // 参加プレイヤー配列初期化
+        joinPlayers_ = new GameObject[GameData.Instance.JoinPlayerCount];
+
+        // プレイヤー生成
+        for(var i = 0; i < GameData.Instance.JoinPlayerCount; i++)
+        {
+            joinPlayers_[i] = PlayerInput.Instantiate(
+                playerIndex: i,
+                pairWithDevice: ControllerManager.Instance.TryGetInputDevice(i,out InputDevice device),
+                prefab: playerPrefab_
+                ).gameObject;
+            joinPlayers_[i].name = $"Player{i + 1}";
+            joinPlayers_[i].transform.SetParent(playerRootObj_);
+        }
+
         GameFlowTask().Forget();
     }
 
@@ -37,9 +62,13 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("ゲーム開始");
 
+        // インゲームBGM再生
+        SoundManager.PlayBGM("BgmGame");
+
         // 待機ステート→落下操作ステートに切り替え
-        foreach (var player in players_)
+        for(var i = 0; i < GameData.Instance.JoinPlayerCount; i++)
         {
+            var player = joinPlayers_[i].GetComponent<Player>();
             player.StartControlFall();
         }
 

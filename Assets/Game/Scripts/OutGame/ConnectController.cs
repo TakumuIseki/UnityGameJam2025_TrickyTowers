@@ -1,52 +1,61 @@
-﻿///
-/// コントローラー接続処理
-///
-using R3;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem.LowLevel;
 
+/// <summary>
+/// コントローラー接続処理
+/// </summary>
 public class ConnectController : MonoBehaviour
 {
     [Header("プレイヤー番号"), SerializeField]
     private int playerNum_ = 0;
 
-    [Header("コントローラー接続画像"),SerializeField]
+    [Header("「コントローラー接続」画像"), SerializeField]
     private Sprite ConectControllerSprite;
 
-    [Header("プレイヤー参加画像"), SerializeField]
+    [Header("「プレイヤー参加」画像"), SerializeField]
     private Sprite RegisterPlayerSprite;
 
     [Header("プレイヤー登録画像"), SerializeField]
     private Image RegisterPlayerImage;
 
     /// <summary>
-    /// コントローラー管理
+    /// プレイヤー番号
     /// </summary>
-    private ControllerManager controllerManager_;
+    public int PlayerNum => playerNum_;
+
+    /// <summary>
+    /// 準備完了状態か
+    /// </summary>
+    public bool IsReady { get; private set; } = false;
 
     /// <summary>
     /// オブジェクトがアクティブになったときに1度だけ呼び出される
     /// </summary>
     private void Start()
     {
-        controllerManager_ = FindObjectOfType<ControllerManager>();
+        // NOTE: タイトルシーンからのボタン押下情報がこっちにも影響しているため、Startメソッドで初期化する
+        IsReady = false;
 
-        // コントローラーの接続状況を監視
-        controllerManager_.ConnectedControllers.Subscribe(count =>
-            {
-                if (count >= playerNum_)
-                {
-                    RegisterPlayerImage.sprite = RegisterPlayerSprite;
-                    GoReadyTask().Forget();
-                }
-                else
-                {
-                    RegisterPlayerImage.sprite = ConectControllerSprite;
-                    ChangeColor(Color.white);
-                }
-            }
-        );
+        // コントローラー接続状態変更イベント登録
+        ControllerManager.Instance.OnGamepadConnectionChanged += HandlePadChange;
+
+        // コントローラーが接続されているか確認
+        if(ControllerManager.Instance.TryGetGamepad(playerNum_,out var gamepad))
+        {
+            // コントローラー接続状態
+            RegisterPlayerImage.sprite = RegisterPlayerSprite;
+            GoReadyTask().Forget();
+        }
+        else
+        {
+            // コントローラー未接続状態
+            RegisterPlayerImage.sprite = ConectControllerSprite;
+            return;
+        }
+
+        ChangeColor(Color.white);
     }
 
     /// <summary>
@@ -54,12 +63,12 @@ public class ConnectController : MonoBehaviour
     /// </summary>
     private async UniTask GoReadyTask()
     {
-        // Aボタンが押されるまで待機
-        await UniTask.WaitUntil(() => Input.GetKeyDown(KeyCode.JoystickButton0));
+        // プレイヤーのAボタンが押されるまで待機
+        await ControllerManager.Instance.WaitForButtonDownAsync(playerNum_,GamepadButton.A);
 
         // プレイヤー準備完了状態
         ChangeColor(Color.yellow);
-
+        IsReady = true;
         BackReadyTask().Forget();
     }
 
@@ -69,11 +78,11 @@ public class ConnectController : MonoBehaviour
     private async UniTask BackReadyTask()
     {
         // Bボタンが押されるまで待機
-        await UniTask.WaitUntil(() => Input.GetKeyDown(KeyCode.JoystickButton1));
+        await ControllerManager.Instance.WaitForButtonDownAsync(playerNum_,GamepadButton.B);
 
         // プレイヤー準備中状態
         ChangeColor(Color.white);
-
+        IsReady = false;
         GoReadyTask().Forget();
     }
 
@@ -83,5 +92,33 @@ public class ConnectController : MonoBehaviour
     private void ChangeColor(Color color)
     {
         RegisterPlayerImage.color = color;
+    }
+
+    /// <summary>
+    /// コントローラー接続状態変更ハンドラー
+    /// </summary>
+    private void HandlePadChange(int playerNum,bool connected)
+    {
+        // 自分のプレイヤー番号でなければ無視
+        if(playerNum != playerNum_)
+        {
+            return;
+        }
+
+        // 接続された
+        if(connected)
+        {
+            RegisterPlayerImage.sprite = RegisterPlayerSprite;
+            ChangeColor(Color.white);
+            GoReadyTask().Forget();
+            IsReady = false;
+        }
+        // 切断された
+        else
+        {
+            RegisterPlayerImage.sprite = ConectControllerSprite;
+            ChangeColor(Color.white);
+            IsReady = false;
+        }
     }
 }

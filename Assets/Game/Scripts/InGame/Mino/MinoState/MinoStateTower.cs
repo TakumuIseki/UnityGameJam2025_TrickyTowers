@@ -6,11 +6,6 @@ using UnityEngine;
 public class MinoStateTower : IMinoState
 {
     /// <summary>
-    /// 重力
-    /// </summary>
-    private static readonly float GRAVITY = 30.0f;
-
-    /// <summary>
     /// ミノ
     /// </summary>
     Mino _mino;
@@ -52,7 +47,7 @@ public class MinoStateTower : IMinoState
         //}
 
         // 重力を設定
-        rigidbody_.gravityScale = GRAVITY;
+        rigidbody_.gravityScale = MinoConst.GRAVITY;
 
         // タワータグを付与する
         _mino.gameObject.tag = towerTag_;

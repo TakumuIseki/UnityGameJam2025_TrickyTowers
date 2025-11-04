@@ -1,0 +1,50 @@
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+
+/// <summary>
+/// タイトルシーンマネージャー
+/// </summary>
+public class TitleSceneManager : MonoBehaviour
+{
+    /// <summary>
+    /// プレイヤー入力
+    /// </summary>
+    private InputActions playerInput_;
+
+    /// <summary>
+    /// Start
+    /// </summary>
+    private void Start()
+    {
+        // タイトルBGM再生
+        SoundManager.PlayBGM("BgmTitle");
+    }
+
+    /// <summary>
+    /// 有効化時
+    /// </summary>
+    private void OnEnable()
+    {
+        playerInput_ = new InputActions();
+
+        // 入力アクション有効化(アウトゲーム用マップのみ)
+        playerInput_.OutGameScene.Enable();
+
+        // 購読
+
+        // セレクトボタンが押されたらゲーム終了
+        playerInput_.OutGameScene.GameEnd.performed += _ => Application.Quit();
+
+        // Aボタンが押されたらプレイヤー登録シーンへ遷移
+        playerInput_.OutGameScene.A.performed += _ => SceneManager.LoadScene(SceneNameConst.RegisterPlayerSceneName);
+    }
+
+    /// <summary>
+    /// 無効化時
+    /// </summary>
+    private void OnDisable()
+    {
+        // 入力アクション無効化(アウトゲーム用マップのみ)
+        playerInput_.OutGameScene.Disable();
+    }
+}
