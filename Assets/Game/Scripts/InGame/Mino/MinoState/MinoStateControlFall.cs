@@ -8,12 +8,12 @@ public class MinoStateControlFall : IMinoState
     /// <summary>
     /// ミノ
     /// </summary>
-    Mino _mino;
-    
+    private Mino _mino;
+
     /// <summary>
     /// ミノのトランスフォーム
     /// </summary>
-    Transform _transform;
+    private Transform _transform;
 
     /// <summary>
     /// ステート
