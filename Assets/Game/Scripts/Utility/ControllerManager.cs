@@ -32,6 +32,7 @@ public class ControllerManager : MonoBehaviour
 
     private void Awake()
     {
+        // シングルトン設定
         if(Instance != null && Instance != this)
         {
             Destroy(gameObject);

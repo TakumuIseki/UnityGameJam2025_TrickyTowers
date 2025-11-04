@@ -19,6 +19,20 @@ public class RegisterPlayerSceneManager : MonoBehaviour
         {
             if(controller.IsReady && ControllerManager.Instance.IsPressed(controller.PlayerNum,UnityEngine.InputSystem.LowLevel.GamepadButton.Start))
             {
+                // BGM停止
+                SoundManager.StopBGM();
+
+                // プレイヤー数を登録
+                GameData.Instance.JoinPlayerCount = 0;
+                foreach(var connectController in connectControllers_)
+                {
+                    // 準備完了しているプレイヤー数をカウント
+                    if(connectController.IsReady)
+                    {
+                        GameData.Instance.JoinPlayerCount++;
+                    }
+                }
+
                 // インゲームシーンへ遷移
                 SceneManager.LoadScene(SceneNameConst.GameSceneName);
             }

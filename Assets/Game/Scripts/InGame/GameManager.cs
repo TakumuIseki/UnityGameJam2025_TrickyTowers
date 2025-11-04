@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
@@ -12,10 +12,6 @@ public class GameManager : MonoBehaviour
 
     [Header("制限時間タイマー"), SerializeField]
     private GameLimitTimer gameLimitTimer_;
-
-    // TODO: プレイヤー数はプレイヤー登録シーンで決定された人数を使う
-    [Header("参加プレイヤー数"), SerializeField]
-    private int joinPlayerCount = 2;
 
     [Header("プレイヤープレハブ"), SerializeField]
     private GameObject playerPrefab_;
@@ -34,10 +30,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // 参加プレイヤー配列初期化
-        joinPlayers_ = new GameObject[joinPlayerCount];
+        joinPlayers_ = new GameObject[GameData.Instance.JoinPlayerCount];
 
         // プレイヤー生成
-        for(var i = 0; i < joinPlayerCount; i++)
+        for(var i = 0; i < GameData.Instance.JoinPlayerCount; i++)
         {
             joinPlayers_[i] = Instantiate(
                 playerPrefab_,
@@ -65,8 +61,11 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("ゲーム開始");
 
+        // インゲームBGM再生
+        SoundManager.PlayBGM("BgmGame");
+
         // 待機ステート→落下操作ステートに切り替え
-        for(var i = 0; i < joinPlayerCount; i++)
+        for(var i = 0; i < GameData.Instance.JoinPlayerCount; i++)
         {
             var player = joinPlayers_[i].GetComponent<Player>();
             player.StartControlFall();
