@@ -9,6 +9,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.LowLevel;
 
+/// <summary>
+/// コントローラー管理
+/// </summary>
 public class ControllerManager : MonoBehaviour
 {
     public static ControllerManager Instance { get; private set; }

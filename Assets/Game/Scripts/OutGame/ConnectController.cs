@@ -11,30 +11,50 @@ public class ConnectController : MonoBehaviour
     [Header("プレイヤー番号"), SerializeField]
     private int playerNum_ = 0;
 
-    [Header("コントローラー接続画像"), SerializeField]
+    [Header("「コントローラー接続」画像"), SerializeField]
     private Sprite ConectControllerSprite;
 
-    [Header("プレイヤー参加画像"), SerializeField]
+    [Header("「プレイヤー参加」画像"), SerializeField]
     private Sprite RegisterPlayerSprite;
 
     [Header("プレイヤー登録画像"), SerializeField]
     private Image RegisterPlayerImage;
 
     /// <summary>
+    /// プレイヤー番号
+    /// </summary>
+    public int PlayerNum => playerNum_;
+
+    /// <summary>
     /// 準備完了状態か
     /// </summary>
-    public bool IsReady { get; private set; }
+    public bool IsReady { get; private set; } = false;
 
     /// <summary>
     /// オブジェクトがアクティブになったときに1度だけ呼び出される
     /// </summary>
     private void Start()
     {
-        // コントローラー接続状態
+        // NOTE: タイトルシーンからのボタン押下情報がこっちにも影響しているため、Startメソッドで初期化する
+        IsReady = false;
+
+        // コントローラー接続状態変更イベント登録
         ControllerManager.Instance.OnGamepadConnectionChanged += HandlePadChange;
-        ControllerManager.Instance.OnGamepadConnectionChanged += HandlePadChange;
-        // コントローラー未接続状態
-        RegisterPlayerImage.sprite = ConectControllerSprite;
+
+        // コントローラーが接続されているか確認
+        if(ControllerManager.Instance.TryGetGamepad(playerNum_,out var gamepad))
+        {
+            // コントローラー接続状態
+            RegisterPlayerImage.sprite = RegisterPlayerSprite;
+            GoReadyTask().Forget();
+        }
+        else
+        {
+            // コントローラー未接続状態
+            RegisterPlayerImage.sprite = ConectControllerSprite;
+            return;
+        }
+
         ChangeColor(Color.white);
     }
 
@@ -79,7 +99,26 @@ public class ConnectController : MonoBehaviour
     /// </summary>
     private void HandlePadChange(int playerNum,bool connected)
     {
-        RegisterPlayerImage.sprite = RegisterPlayerSprite;
-        GoReadyTask().Forget();
+        // 自分のプレイヤー番号でなければ無視
+        if(playerNum != playerNum_)
+        {
+            return;
+        }
+
+        // 接続された
+        if(connected)
+        {
+            RegisterPlayerImage.sprite = RegisterPlayerSprite;
+            ChangeColor(Color.white);
+            GoReadyTask().Forget();
+            IsReady = false;
+        }
+        // 切断された
+        else
+        {
+            RegisterPlayerImage.sprite = ConectControllerSprite;
+            ChangeColor(Color.white);
+            IsReady = false;
+        }
     }
 }
