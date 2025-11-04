@@ -285,6 +285,7 @@ MonoBehaviour:
   - {fileID: 4586487290329178538, guid: 8aafce9476f8c1e458d77921a9ff868e, type: 3}
   nextMinoViewPointTransform_: {fileID: 8295646121648992649}
   player_: {fileID: 6787971562695432126}
+  playerInput_: {fileID: 2595352797511107633}
 --- !u!1 &1279326418954687775
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +440,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 22c7bc778b360e54187c37e5203ccbeb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

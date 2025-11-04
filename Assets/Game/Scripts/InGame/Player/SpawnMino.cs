@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// ミノをスポーンさせる
@@ -13,6 +14,9 @@ public class SpawnMino : MonoBehaviour
 
     [Header("プレイヤー"), SerializeField]
     private Player player_;
+
+    [Header("プレイヤー入力"),SerializeField]
+    private PlayerInput playerInput_;
 
     /// <summary>
     /// 次にスポーンするミノのGameObject
@@ -34,6 +38,7 @@ public class SpawnMino : MonoBehaviour
 
         var mino = firstMino.GetComponent<Mino>();
         mino.SetSpawner(this);
+        mino.PlayerInput = playerInput_;
 
         return mino;
     }
@@ -52,6 +57,7 @@ public class SpawnMino : MonoBehaviour
         var mino = nextMino_.GetComponent<Mino>();
         mino.ControlFallState();
         mino.SetSpawner(this);
+        mino.PlayerInput = playerInput_;
 
         // 新しいミノを追加
         player_.AddMino(mino);
@@ -75,6 +81,7 @@ public class SpawnMino : MonoBehaviour
 
         var mino = nextMino_.GetComponent<Mino>();
         mino.SetSpawner(this);
+        mino.PlayerInput = playerInput_;
 
         return mino;
     }

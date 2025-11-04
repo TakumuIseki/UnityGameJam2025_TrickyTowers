@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// ミノ
@@ -12,6 +13,11 @@ public class Mino : MonoBehaviour
     /// スポナー
     /// </summary>
     private SpawnMino spawnMino_;
+
+    /// <summary>
+    /// プレイヤー入力
+    /// </summary>
+    public PlayerInput PlayerInput { get; set; }
 
     /// <summary>s
     /// ステートパターンのContext

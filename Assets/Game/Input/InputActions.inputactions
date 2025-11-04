@@ -7,8 +7,26 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "3e96f100-87b5-461e-a668-bd0d7ede9fec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rotation",
+                    "type": "Button",
+                    "id": "90c196d8-31d2-4cc3-b747-ec2d5f6b46ea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fall",
+                    "type": "Value",
+                    "id": "874b8c12-4721-468e-8414-832d55b2b141",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -95,7 +113,7 @@
                 {
                     "name": "",
                     "id": "d757c0ae-8321-4fb7-aae9-476faf4d386a",
-                    "path": "<Gamepad>/leftStick",
+                    "path": "<Gamepad>/dpad",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -144,6 +162,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "GameEnd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "332c278a-4492-4a90-bcfa-7fd92af744fe",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fall",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9514391d-da41-4ff6-9162-f81dd79a48fe",
+                    "path": "<Gamepad>/dpad",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

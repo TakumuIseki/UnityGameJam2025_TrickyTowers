@@ -29,8 +29,26 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""3e96f100-87b5-461e-a668-bd0d7ede9fec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotation"",
+                    ""type"": ""Button"",
+                    ""id"": ""90c196d8-31d2-4cc3-b747-ec2d5f6b46ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fall"",
+                    ""type"": ""Value"",
+                    ""id"": ""874b8c12-4721-468e-8414-832d55b2b141"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -117,7 +135,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d757c0ae-8321-4fb7-aae9-476faf4d386a"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -166,6 +184,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""GameEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""332c278a-4492-4a90-bcfa-7fd92af744fe"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9514391d-da41-4ff6-9162-f81dd79a48fe"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -245,6 +285,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // InGameScene
         m_InGameScene = asset.FindActionMap("InGameScene", throwIfNotFound: true);
         m_InGameScene_Move = m_InGameScene.FindAction("Move", throwIfNotFound: true);
+        m_InGameScene_Rotation = m_InGameScene.FindAction("Rotation", throwIfNotFound: true);
+        m_InGameScene_Fall = m_InGameScene.FindAction("Fall", throwIfNotFound: true);
         m_InGameScene_A = m_InGameScene.FindAction("A", throwIfNotFound: true);
         m_InGameScene_B = m_InGameScene.FindAction("B", throwIfNotFound: true);
         m_InGameScene_X = m_InGameScene.FindAction("X", throwIfNotFound: true);
@@ -318,6 +360,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_InGameScene;
     private List<IInGameSceneActions> m_InGameSceneActionsCallbackInterfaces = new List<IInGameSceneActions>();
     private readonly InputAction m_InGameScene_Move;
+    private readonly InputAction m_InGameScene_Rotation;
+    private readonly InputAction m_InGameScene_Fall;
     private readonly InputAction m_InGameScene_A;
     private readonly InputAction m_InGameScene_B;
     private readonly InputAction m_InGameScene_X;
@@ -329,6 +373,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         private @InputActions m_Wrapper;
         public InGameSceneActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_InGameScene_Move;
+        public InputAction @Rotation => m_Wrapper.m_InGameScene_Rotation;
+        public InputAction @Fall => m_Wrapper.m_InGameScene_Fall;
         public InputAction @A => m_Wrapper.m_InGameScene_A;
         public InputAction @B => m_Wrapper.m_InGameScene_B;
         public InputAction @X => m_Wrapper.m_InGameScene_X;
@@ -347,6 +393,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Rotation.started += instance.OnRotation;
+            @Rotation.performed += instance.OnRotation;
+            @Rotation.canceled += instance.OnRotation;
+            @Fall.started += instance.OnFall;
+            @Fall.performed += instance.OnFall;
+            @Fall.canceled += instance.OnFall;
             @A.started += instance.OnA;
             @A.performed += instance.OnA;
             @A.canceled += instance.OnA;
@@ -372,6 +424,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Rotation.started -= instance.OnRotation;
+            @Rotation.performed -= instance.OnRotation;
+            @Rotation.canceled -= instance.OnRotation;
+            @Fall.started -= instance.OnFall;
+            @Fall.performed -= instance.OnFall;
+            @Fall.canceled -= instance.OnFall;
             @A.started -= instance.OnA;
             @A.performed -= instance.OnA;
             @A.canceled -= instance.OnA;
@@ -472,6 +530,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public interface IInGameSceneActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnRotation(InputAction.CallbackContext context);
+        void OnFall(InputAction.CallbackContext context);
         void OnA(InputAction.CallbackContext context);
         void OnB(InputAction.CallbackContext context);
         void OnX(InputAction.CallbackContext context);
