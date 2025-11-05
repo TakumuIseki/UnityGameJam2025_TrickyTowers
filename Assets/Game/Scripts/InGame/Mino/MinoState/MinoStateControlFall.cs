@@ -161,6 +161,9 @@ public class MinoStateControlFall : IMinoState
     /// </summary>
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        // カメラを揺らす
+        CameraConttoller.Instance.Shake(5,0.2f);
+
         // イベント登録解除
         _mino.PlayerInput.actions["Move"].performed -= OnMove;
         _mino.PlayerInput.actions["Rotation"].performed -= OnRotation;
