@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -22,7 +22,7 @@ public class DisplayRideTowerNum : MonoBehaviour
     /// </summary>
     void Update()
     {
-        rideTowerNumText_.text = $"{CalcRideTowerNum()}こ";
+        rideTowerNumText_.text = $"{CalcRideTowerNum()}";
     }
 
     /// <summary>

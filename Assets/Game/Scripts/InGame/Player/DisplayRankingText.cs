@@ -1,16 +1,20 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 /// <summary>
 /// ランキングテキスト表示
 /// </summary>
 public class DisplayRankingText : MonoBehaviour
 {
-    [Header("ランキングテキスト"), SerializeField]
-    private TextMeshProUGUI rankingText_;
+    [Header("ランキング画像"), SerializeField]
+    private Image rankingImage_;
 
     [Header("タワーに乗っているミノの数を表示"), SerializeField]
     private DisplayRideTowerNum displayRideTowerNum_;
+
+    [Header("順位画像リスト"),SerializeField]
+    private Sprite[] rankingSprites_;
 
     /// <summary>
     /// Update
@@ -44,7 +48,16 @@ public class DisplayRankingText : MonoBehaviour
                 rank++;
             }
         }
-        // ランキングテキスト更新
-        rankingText_.text = $"{rank}い";
+        // ランキング画像更新
+        if (rank != 4)
+        {
+            rankingImage_.enabled = true;
+            rankingImage_.sprite = rankingSprites_[rank - 1];
+        }
+        else
+        {
+            // Imageコンポーネントを非表示にする
+            rankingImage_.enabled = false;
+        }
     }
 }

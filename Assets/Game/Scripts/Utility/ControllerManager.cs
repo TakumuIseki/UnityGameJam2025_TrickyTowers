@@ -174,7 +174,8 @@ public class ControllerManager : MonoBehaviour
     /// </summary>
     public InputDevice TryGetInputDevice(int playerNum,out InputDevice device)
     {
-        if(TryGetGamepad(playerNum,out var pad))
+        // 指定プレイヤー(1始まり)の Gamepad を取得
+        if (TryGetGamepad(playerNum,out var pad))
         {
             device = pad.device;
             return device;

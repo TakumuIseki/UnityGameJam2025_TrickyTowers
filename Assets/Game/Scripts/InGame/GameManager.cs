@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     [Header("プレイヤールートオブジェクト"), SerializeField]
     private Transform playerRootObj_;
 
+    [Header("制限時間"), SerializeField]
+    private GameObject gameLimitTimerObj_;
+
     /// <summary>
     /// 参加プレイヤーたち
     /// </summary>
@@ -39,7 +42,7 @@ public class GameManager : MonoBehaviour
         {
             joinPlayers_[i] = PlayerInput.Instantiate(
                 playerIndex: i,
-                pairWithDevice: ControllerManager.Instance.TryGetInputDevice(i,out InputDevice device),
+                pairWithDevice: ControllerManager.Instance.TryGetInputDevice(i+1,out InputDevice device),
                 prefab: playerPrefab_
                 ).gameObject;
             joinPlayers_[i].name = $"Player{i + 1}";
@@ -62,9 +65,6 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("ゲーム開始");
 
-        // ゲーム開始SE再生
-        SoundManager.PlaySE("SeEndBuzzer");
-
         // インゲームBGM再生
         SoundManager.PlayBGM("BgmGame");
 
@@ -74,6 +74,9 @@ public class GameManager : MonoBehaviour
             var player = joinPlayers_[i].GetComponent<Player>();
             player.StartControlFall();
         }
+
+        // 制限時間タイマー表示
+        gameLimitTimerObj_.SetActive(true);
 
         // 制限時間測定
         await gameLimitTimer_.MeasureLimitTimeTask();
