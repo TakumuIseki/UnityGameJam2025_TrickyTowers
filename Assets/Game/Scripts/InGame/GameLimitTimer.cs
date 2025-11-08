@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 制限時間タイマー
@@ -13,6 +14,9 @@ public class GameLimitTimer : MonoBehaviour
 
     [Header("制限時間"), SerializeField]
     private int maxTime_ = 60;
+
+    [Header("画像"), SerializeField]
+    private Image image_;
 
     /// <summary>
     /// Start
@@ -28,9 +32,10 @@ public class GameLimitTimer : MonoBehaviour
     /// <returns></returns>
     public async UniTask MeasureLimitTimeTask()
     {
-        for(var time = maxTime_;time >= 0; time--)
+        for(GameData.Instance.LimitTime = maxTime_; GameData.Instance.LimitTime >= 0; GameData.Instance.LimitTime--)
         {
-            SetText(time);
+            SetText(GameData.Instance.LimitTime);
+            image_.fillAmount = Mathf.InverseLerp(0, maxTime_, GameData.Instance.LimitTime);
             await UniTask.Delay(TimeSpan.FromSeconds(1));
         }
     }

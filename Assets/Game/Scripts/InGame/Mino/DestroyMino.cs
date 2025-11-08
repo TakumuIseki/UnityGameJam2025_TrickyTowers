@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// ミノの破棄機能
@@ -10,6 +10,9 @@ public class DestroyMino : MonoBehaviour
     /// </summary>
     private bool _isDestroy => transform.position.y < MinoConst.DESTROY_Y_THRESHOLD;
 
+    // 高すぎる場合でも破棄処理が走るようにするため、Updateでチェック
+    private bool _hasDestroyed => transform.position.y > 200f;
+
     /// <summary>
     /// プレイヤー
     /// </summary>
@@ -20,8 +23,14 @@ public class DestroyMino : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        // タワータグが付いていて、高すぎる場合に破棄
+        if (gameObject.tag == "Tower"&& _hasDestroyed)
+        {
+            Destroy();
+        }
+
         // ミノのy座標が一定以下になったら破棄
-        if(_isDestroy)
+        if (_isDestroy)
         {
             Destroy();
         }

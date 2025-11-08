@@ -33,10 +33,38 @@ public class TitleSceneManager : MonoBehaviour
         // 購読
 
         // セレクトボタンが押されたらゲーム終了
-        playerInput_.OutGameScene.GameEnd.performed += _ => Application.Quit();
+        playerInput_.OutGameScene.GameEnd.performed += _ =>
+        {
+            EndGame();
+        };
 
         // Aボタンが押されたらプレイヤー登録シーンへ遷移
-        playerInput_.OutGameScene.A.performed += _ => SceneManager.LoadScene(SceneNameConst.RegisterPlayerSceneName);
+        playerInput_.OutGameScene.A.performed += _ =>
+        {
+            ChangeScenen();
+        };
+    }
+
+    /// <summary>
+    /// ゲーム終了
+    /// </summary>
+    private async void EndGame()
+    {
+        // 決定SE再生
+        await SoundManager.PlaySEAsync("SeDecision");
+        // ゲーム終了
+        Application.Quit();
+    }
+
+    /// <summary>
+    /// シーン変更
+    /// </summary>
+    private async void ChangeScenen()
+    {
+        // 決定SE再生
+        await SoundManager.PlaySEAsync("SeDecision");
+
+        SceneManager.LoadScene(SceneNameConst.RegisterPlayerSceneName);
     }
 
     /// <summary>

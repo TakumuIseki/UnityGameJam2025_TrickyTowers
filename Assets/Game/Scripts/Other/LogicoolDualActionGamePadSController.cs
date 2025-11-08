@@ -47,12 +47,6 @@ public class LogicoolDualActionGamePad : Gamepad
         );
 
     }
-
-    //登録が走ったことを確認
-    [RuntimeInitializeOnLoadMethod]
-    static void Init() { 
-         UnityEngine.Debug.Log("initController");
-    }
 }
 
 //サイズの算出方法いまいちよくわかっていない

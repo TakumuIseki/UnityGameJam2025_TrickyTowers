@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -22,7 +22,13 @@ public class DisplayRideTowerNum : MonoBehaviour
     /// </summary>
     void Update()
     {
-        rideTowerNumText_.text = $"{CalcRideTowerNum()}こ";
+        // 制限時間中のみ表示
+        if (GameData.Instance.LimitTime <= 0)
+        {
+            return;
+        }
+
+        rideTowerNumText_.text = $"{CalcRideTowerNum()}";
     }
 
     /// <summary>

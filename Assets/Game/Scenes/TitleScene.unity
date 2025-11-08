@@ -155,7 +155,9 @@ MonoBehaviour:
   bgm_: {fileID: 846125925}
   se_: {fileID: 1563115129}
   seClips_:
-  - {fileID: 8300000, guid: c52724ddb92144c1ab523e2632cd76cf, type: 3}
+  - {fileID: 8300000, guid: f3cc5dc8fb4e842678a0a726e379fb1c, type: 3}
+  - {fileID: 8300000, guid: fd2d1c77114dc47c18c7c65d9f5466f2, type: 3}
+  - {fileID: 8300000, guid: 262b6905217ed446e9ace4e9934fb4fa, type: 3}
   - {fileID: 8300000, guid: 4af794c099e924467a1377bd4b21e303, type: 3}
   - {fileID: 8300000, guid: 87fb67694578c4546abc4eaf6bcc6fe1, type: 3}
   - {fileID: 8300000, guid: eeb6900682a994017a36231d9f4aa64a, type: 3}
@@ -163,6 +165,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 97809386748b94b14a572213347a7f7c, type: 3}
   - {fileID: 8300000, guid: f8e178396ecd94dc79dfbee3ebf00d0f, type: 3}
   - {fileID: 8300000, guid: 93bc186cef4624da28d9b807c48ec73a, type: 3}
+  - {fileID: 8300000, guid: 61ef5612d176c9c4d9678ca53e82ec63, type: 3}
+  - {fileID: 8300000, guid: ff650e91686951a48bd5571d059a0d38, type: 3}
   bgmClips_:
   - {fileID: 8300000, guid: dce5b35c7a9d648cbb2d86200d10c24c, type: 3}
   - {fileID: 8300000, guid: 091fd88703dd341f5a12a1a1662b6654, type: 3}
@@ -232,10 +236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -680,8 +684,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

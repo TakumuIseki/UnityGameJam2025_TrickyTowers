@@ -21,7 +21,18 @@ public class CountDown : MonoBehaviour
     {
         foreach(string displayText in displayTexts_)
         {
-            countDownText_.text = displayText;
+            if (displayText != "スタート！")
+            {
+                // SE再生
+                SoundManager.PlaySE("SeCountdown_" + displayText);
+            }
+            else
+            {
+                // ゲーム開始SE再生
+                SoundManager.PlaySE("SeEndBuzzer");
+            }
+
+                countDownText_.text = displayText;
             await UniTask.Delay(TimeSpan.FromSeconds(1));
         }
         Destroy(gameObject);

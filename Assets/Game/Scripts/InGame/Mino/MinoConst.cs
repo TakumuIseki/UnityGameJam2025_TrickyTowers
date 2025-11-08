@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// ミノ定数
@@ -18,12 +18,12 @@ public static class MinoConst
     /// <summary>
     /// 通常時の落下速度
     /// </summary>
-    public static readonly float NORMAL_FALL_SPEED = 100.0f;
+    public static readonly float NORMAL_FALL_SPEED = 150.0f;
 
     /// <summary>
     /// 加速倍率
     /// </summary>
-    public static readonly float SPEED_UP_MAGNIFICATION = 2.0f;
+    public static readonly float SPEED_UP_MAGNIFICATION = 3.0f;
 
     /// <summary>
     /// 回転角度

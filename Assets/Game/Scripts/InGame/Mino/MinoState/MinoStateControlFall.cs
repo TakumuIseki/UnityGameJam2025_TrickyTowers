@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// ミノステート　：　落下操作
@@ -26,6 +27,12 @@ public class MinoStateControlFall : IMinoState
     private bool isLockRotation_ = false;
 
     /// <summary>
+    /// 落下速度アップしているか
+    /// (ゲームパッド十字キー下方向が押されたか)
+    /// </summary>
+    private bool _isFallSpeedUp => _mino.PlayerInput.actions["Fall"].ReadValue<Vector2>().y < 0;
+
+    /// <summary>
     /// コンストラクタ
     /// </summary>
     public MinoStateControlFall(Mino mino,Transform transform)
@@ -39,7 +46,12 @@ public class MinoStateControlFall : IMinoState
     /// </summary>
     public void Enter() 
     {
+        // ミノObjectのタグをMinoに変更
+        _mino.gameObject.tag = "Mino";
 
+        // 入力イベント登録
+        _mino.PlayerInput.actions["Move"].performed += OnMove;
+        _mino.PlayerInput.actions["Rotation"].performed += OnRotation;
     }
 
     /// <summary>
@@ -47,20 +59,8 @@ public class MinoStateControlFall : IMinoState
     /// </summary>
     public void Update()
     {
-        // 落下速度決定
-        var fallSpeed = Input.GetKey(KeyCode.DownArrow) ?   MinoConst.NORMAL_FALL_SPEED * MinoConst.SPEED_UP_MAGNIFICATION : MinoConst.NORMAL_FALL_SPEED;
-
-        // 時間によって位置を下げる
-        _transform.position += Vector3.down * fallSpeed * Time.deltaTime;
-
-        // 左に移動
-        Move(Input.GetKeyDown(KeyCode.LeftArrow), Vector3.left);
-
-        // 右に移動
-        Move(Input.GetKeyDown(KeyCode.RightArrow), Vector3.right);
-
-        // 回転操作
-        Rotation();
+        // 落下処理
+        Fall();
     }
     
     /// <summary>
@@ -71,16 +71,78 @@ public class MinoStateControlFall : IMinoState
     }
 
     /// <summary>
-    /// 左右移動処理用メソッド。
+    /// 落下処理
     /// </summary>
-    /// <param name="getKeyDown">入力するキー</param>
-    /// <param name="direction">移動方向</param>
-    private void Move(bool getKeyDown, Vector3 direction)
+    private void Fall()
     {
-        if (getKeyDown)
+        // 落下速度決定
+        var fallSpeed = _isFallSpeedUp ? MinoConst.NORMAL_FALL_SPEED * MinoConst.SPEED_UP_MAGNIFICATION : MinoConst.NORMAL_FALL_SPEED;
+
+        // 時間によって位置を下げる
+        _transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+
+    }
+
+    /// <summary>
+    /// 移動入力
+    /// </summary>
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        // performedでなければ処理しない
+        // NOTE: startedやcanceledでも呼ばれるため制御が必要
+        if(!context.performed)
         {
-            _transform.Translate(direction * MinoConst.MOVE_DISTANCE_PER_KEY, Space.World);
+            return;
         }
+
+        // Y方向に入力があったら移動しない
+        Vector2 inputValue = context.ReadValue<Vector2>();
+        if(Mathf.Abs(inputValue.y) > Mathf.Epsilon)
+        {
+            return;
+        }
+
+        // trueなら右移動、falseなら左移動
+        var direction = inputValue.x < 0 ? Vector3.left : Vector3.right;
+        Move(direction);
+    }
+
+    /// <summary>
+    /// 回転入力
+    /// </summary>
+    private void OnRotation(InputAction.CallbackContext context)
+    {
+        // performedでなければ処理しない
+        // NOTE: startedやcanceledでも呼ばれるため制御が必要
+        if (!context.performed)
+        {
+            return;
+        }
+
+        // X方向に入力があったら回転しない
+        Vector2 inputValue = context.ReadValue<Vector2>();
+        if(Mathf.Abs(inputValue.x) > Mathf.Epsilon)
+        {
+            return;
+        }
+
+        // Y方向が下方向なら回転しない
+        if(inputValue.y <= 0)
+        {
+            return;
+        }
+
+        // 回転処理
+        Rotation();
+    }
+
+    /// <summary>
+    /// 左右移動
+    /// </summary>
+    /// <param name="direction">移動方向</param>
+    private void Move(Vector3 direction)
+    {
+        _transform.Translate(direction * MinoConst.MOVE_DISTANCE_PER_KEY, Space.World);
     }
 
     /// <summary>
@@ -94,11 +156,10 @@ public class MinoStateControlFall : IMinoState
             return;
         }
 
-        // 上キーで90度回転。
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            _transform.Rotate(MinoConst.ROTATION_ANGLE);
-        }
+        // 回転SE再生
+        SoundManager.PlaySE("SeMinoRotation");
+
+        _transform.Rotate(MinoConst.ROTATION_ANGLE);
     }
 
     /// <summary>
@@ -106,6 +167,13 @@ public class MinoStateControlFall : IMinoState
     /// </summary>
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        // イベント登録解除
+        _mino.PlayerInput.actions["Move"].performed -= OnMove;
+        _mino.PlayerInput.actions["Rotation"].performed -= OnRotation;
+
+        // 接着SE再生
+        SoundManager.PlaySE("SeMinoInstallation");
+
         // タワーステートに変更
         _mino.TowerState();
     }

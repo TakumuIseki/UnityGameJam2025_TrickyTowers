@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Tower
+  - Mino
+  - NextMino
   layers:
   - Default
   - TransparentFX
