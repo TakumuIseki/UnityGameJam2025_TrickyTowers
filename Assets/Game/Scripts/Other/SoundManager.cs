@@ -1,17 +1,13 @@
+﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
-/// <summary>
-/// サウンドマネージャー
-/// </summary>
 public class SoundManager : MonoBehaviour
 {
-    /// <summary>
-    /// インスタンス
-    /// </summary>
-    public static SoundManager Instance { get; set; }
+    public static SoundManager Instance { get; private set; }
 
-    [Header("BGMソース"),SerializeField]
+    [Header("BGMソース"), SerializeField]
     private AudioSource bgm_;
 
     [Header("SEソース"), SerializeField]
@@ -23,16 +19,10 @@ public class SoundManager : MonoBehaviour
     [Header("BGMクリップ"), SerializeField]
     private List<AudioClip> bgmClips_;
 
-    [Header("SEディクショナリー"), SerializeField]
     private Dictionary<string, AudioClip> seDict_ = new();
-
-    [Header("BGMディクショナリー"), SerializeField]
     private Dictionary<string, AudioClip> bgmDict_ = new();
 
-    /// <summary>
-    /// Start
-    /// </summary>
-    private void Start()
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -42,7 +32,6 @@ public class SoundManager : MonoBehaviour
 
         Instance = this;
 
-        // ディクショナリー初期化
         foreach (var clip in seClips_)
         {
             seDict_[clip.name] = clip;
@@ -53,9 +42,7 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// BGM再生
-    /// </summary>
+    // BGM再生
     public static void PlayBGM(string clipName, float volume = 0.5f, float pitch = 1.0f, bool loop = true)
     {
         if (!Instance.bgmDict_.TryGetValue(clipName, out var clip))
@@ -70,9 +57,24 @@ public class SoundManager : MonoBehaviour
         Instance.bgm_.Play();
     }
 
-    /// <summary>
-    /// SE再生
-    /// </summary>
+    // 非同期SE再生
+    public static async UniTask PlaySEAsync(string clipName, float volume = 1.0f, float pitch = 1.0f)
+    {
+        if (!Instance.seDict_.TryGetValue(clipName, out var clip))
+        {
+            Debug.LogError($"SEクリップが見つかりません: {clipName}");
+            return;
+        }
+
+        Instance.se_.volume = volume;
+        Instance.se_.pitch = pitch;
+        Instance.se_.PlayOneShot(clip);
+
+        // 再生が終わるまで待機
+        await UniTask.Delay((int)(clip.length * 1000f));
+    }
+
+    // 同期SE再生
     public static void PlaySE(string clipName, float volume = 1.0f, float pitch = 1.0f)
     {
         if (!Instance.seDict_.TryGetValue(clipName, out var clip))
@@ -80,24 +82,12 @@ public class SoundManager : MonoBehaviour
             Debug.LogError($"SEクリップが見つかりません: {clipName}");
             return;
         }
+
         Instance.se_.volume = volume;
         Instance.se_.pitch = pitch;
         Instance.se_.PlayOneShot(clip);
     }
 
-    /// <summary>
-    /// BGM停止
-    /// </summary>
-    public static void StopBGM()
-    {
-        Instance.bgm_.Stop();
-    }
-
-    /// <summary>
-    /// SE停止
-    /// </summary>
-    public static void StopSE()
-    {
-        Instance.se_.Stop();
-    }
+    public static void StopBGM() => Instance.bgm_.Stop();
+    public static void StopSE() => Instance.se_.Stop();
 }

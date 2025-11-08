@@ -46,6 +46,9 @@ public class MinoStateControlFall : IMinoState
     /// </summary>
     public void Enter() 
     {
+        // ミノObjectのタグをMinoに変更
+        _mino.gameObject.tag = "Mino";
+
         // 入力イベント登録
         _mino.PlayerInput.actions["Move"].performed += OnMove;
         _mino.PlayerInput.actions["Rotation"].performed += OnRotation;

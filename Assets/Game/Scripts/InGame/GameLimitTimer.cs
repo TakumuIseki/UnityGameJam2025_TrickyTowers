@@ -32,10 +32,10 @@ public class GameLimitTimer : MonoBehaviour
     /// <returns></returns>
     public async UniTask MeasureLimitTimeTask()
     {
-        for(var time = maxTime_;time >= 0; time--)
+        for(GameData.Instance.LimitTime = maxTime_; GameData.Instance.LimitTime >= 0; GameData.Instance.LimitTime--)
         {
-            SetText(time);
-            image_.fillAmount = Mathf.InverseLerp(0, maxTime_, time);
+            SetText(GameData.Instance.LimitTime);
+            image_.fillAmount = Mathf.InverseLerp(0, maxTime_, GameData.Instance.LimitTime);
             await UniTask.Delay(TimeSpan.FromSeconds(1));
         }
     }

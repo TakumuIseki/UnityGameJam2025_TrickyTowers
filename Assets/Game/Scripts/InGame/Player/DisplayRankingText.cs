@@ -17,10 +17,36 @@ public class DisplayRankingText : MonoBehaviour
     private Sprite[] rankingSprites_;
 
     /// <summary>
+    /// プレイヤー番号
+    /// </summary>
+    private int playerNum_;
+
+    /// <!--/summary>-->
+    /// Start
+    /// </summary>
+    private void Start()
+    {
+        // 親の親のゲームオブジェクトの名前から番号を取得
+        var parentObjName = transform.parent.parent.gameObject.name;
+        var playerNumStr = parentObjName.Replace("Player", "");
+
+        if (int.TryParse(playerNumStr, out var playerNum))
+        {
+            playerNum_ = playerNum;
+        }
+    }
+
+    /// <summary>
     /// Update
     /// </summary>
     private void Update()
     {
+        // 制限時間が0以下の場合は更新しない
+        if (GameData.Instance.LimitTime <= 0)
+        {
+            return;
+        }
+
         // ランキングテキスト更新
         UpdateRankingText();
     }
@@ -58,6 +84,16 @@ public class DisplayRankingText : MonoBehaviour
         {
             // Imageコンポーネントを非表示にする
             rankingImage_.enabled = false;
+        }
+
+        // 1位の時勝利したプレイヤー番号リストに追加
+        if (rank == 1)
+        {
+            GameData.Instance.AddWinPlayerNum(playerNum_);
+        }
+        else
+        {
+            GameData.Instance.RemoveWinPlayerNum(playerNum_);
         }
     }
 }

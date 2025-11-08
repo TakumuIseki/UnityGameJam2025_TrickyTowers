@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4369223915122551287}
   m_Layer: 0
   m_Name: Tetrimino_KBC
-  m_TagString: Untagged
+  m_TagString: NextMino
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody_: {fileID: 5065426211493673386}
-  towerTag_: Tower
 --- !u!114 &4514552450997190650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4f5dff690314a5dbee9f11f772563e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagToAssign_: Tower
 --- !u!114 &2275187236373926136
 MonoBehaviour:
   m_ObjectHideFlags: 0

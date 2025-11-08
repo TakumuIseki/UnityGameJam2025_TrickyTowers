@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     /// </summary>
     private Mino currentMino_;
 
+    [Header("勝利エフェクト"), SerializeField]
+    private ParticleSystem[] winEffects_;
+
     /// <summary>
     /// Start
     /// </summary>
@@ -66,6 +69,17 @@ public class Player : MonoBehaviour
         if (currentMino_ == mino)
         {
             currentMino_ = null;
+        }
+    }
+
+    /// <summary>
+    /// 勝利エフェクト再生
+    /// </summary>
+    public void PlayWinEffect()
+    {
+        foreach (var winEffect_ in winEffects_)
+        {
+            winEffect_.Play();
         }
     }
 }

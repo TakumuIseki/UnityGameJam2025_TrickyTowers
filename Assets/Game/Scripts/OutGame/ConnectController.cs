@@ -127,4 +127,16 @@ public class ConnectController : MonoBehaviour
             IsReady = false;
         }
     }
+
+    /// <summary>
+    /// オブジェクトが破棄されるときに呼び出され
+    /// <!--/summary>-->
+    private void OnDestroy()
+    {
+        // コントローラー接続状態変更イベント登録解除
+        if(ControllerManager.Instance != null)
+        {
+            ControllerManager.Instance.OnGamepadConnectionChanged -= HandlePadChange;
+        }
+    }
 }
