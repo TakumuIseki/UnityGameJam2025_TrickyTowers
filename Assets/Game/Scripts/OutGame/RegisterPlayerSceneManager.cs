@@ -24,14 +24,17 @@ public class RegisterPlayerSceneManager : MonoBehaviour
 
                 // プレイヤー数を登録
                 GameData.Instance.JoinPlayerCount = 0;
-                foreach(var connectController in connectControllers_)
+                foreach (var connectController in connectControllers_)
                 {
                     // 準備完了しているプレイヤー数をカウント
-                    if(connectController.IsReady)
+                    if (connectController.IsReady)
                     {
                         GameData.Instance.JoinPlayerCount++;
                     }
                 }
+                
+                // 決定SE再生
+                SoundManager.PlaySE("SeDecision");
 
                 // インゲームシーンへ遷移
                 SceneManager.LoadScene(SceneNameConst.GameSceneName);

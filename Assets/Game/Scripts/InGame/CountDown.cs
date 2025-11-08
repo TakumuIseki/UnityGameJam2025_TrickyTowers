@@ -21,6 +21,9 @@ public class CountDown : MonoBehaviour
     {
         foreach(string displayText in displayTexts_)
         {
+            // SE再生
+            SoundManager.PlaySE("SeCountDown_" + displayText);
+            
             countDownText_.text = displayText;
             await UniTask.Delay(TimeSpan.FromSeconds(1));
         }

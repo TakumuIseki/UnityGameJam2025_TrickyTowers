@@ -36,7 +36,13 @@ public class TitleSceneManager : MonoBehaviour
         playerInput_.OutGameScene.GameEnd.performed += _ => Application.Quit();
 
         // Aボタンが押されたらプレイヤー登録シーンへ遷移
-        playerInput_.OutGameScene.A.performed += _ => SceneManager.LoadScene(SceneNameConst.RegisterPlayerSceneName);
+        playerInput_.OutGameScene.A.performed += _ =>
+        {
+            // 決定SE再生
+            SoundManager.PlaySE("SeDecision");
+
+            SceneManager.LoadScene(SceneNameConst.RegisterPlayerSceneName);
+        };
     }
 
     /// <summary>

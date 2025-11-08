@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("ゲーム開始");
 
+        // ゲーム開始SE再生
+        SoundManager.PlaySE("SeEndBuzzer");
+
         // インゲームBGM再生
         SoundManager.PlayBGM("BgmGame");
 
@@ -76,6 +79,12 @@ public class GameManager : MonoBehaviour
         await gameLimitTimer_.MeasureLimitTimeTask();
 
         Debug.Log("ゲーム終了");
+
+        // インゲームBGM停止
+        SoundManager.StopBGM();
+
+        // ゲーム終了SE再生
+        SoundManager.PlaySE("SeEndBuzzer");
 
         // 終了
         // await

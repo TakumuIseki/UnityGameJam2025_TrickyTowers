@@ -64,7 +64,10 @@ public class ConnectController : MonoBehaviour
     private async UniTask GoReadyTask()
     {
         // プレイヤーのAボタンが押されるまで待機
-        await ControllerManager.Instance.WaitForButtonDownAsync(playerNum_,GamepadButton.A);
+        await ControllerManager.Instance.WaitForButtonDownAsync(playerNum_, GamepadButton.A);
+
+        // 選択SE再生
+        SoundManager.PlaySE("SeSelection");
 
         // プレイヤー準備完了状態
         ChangeColor(Color.yellow);
@@ -79,6 +82,9 @@ public class ConnectController : MonoBehaviour
     {
         // Bボタンが押されるまで待機
         await ControllerManager.Instance.WaitForButtonDownAsync(playerNum_,GamepadButton.B);
+
+        // 選択SE再生
+        SoundManager.PlaySE("SeSelection");
 
         // プレイヤー準備中状態
         ChangeColor(Color.white);

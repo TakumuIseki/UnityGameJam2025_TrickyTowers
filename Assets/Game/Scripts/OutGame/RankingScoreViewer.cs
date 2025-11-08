@@ -25,6 +25,12 @@ public class RankingScoreViewer : MonoBehaviour
     /// </summary>
     void Start()
     {
+        // 勝利SE再生
+        SoundManager.PlaySE("SeVictory");
+
+        // リザルトBGM再生
+        SoundManager.PlayBGM("BgmRanking");
+
         // ランキングデータの取得
         var rankingDatas = SaveData.Get().GetRankingDatas();
         // 指定した順位がランキングデータにない場合は非表示にしておく

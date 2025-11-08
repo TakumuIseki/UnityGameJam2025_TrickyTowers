@@ -48,6 +48,9 @@ public class SpawnMino : MonoBehaviour
     /// </summary>
     public Mino Spawn()
     {
+        // ポップSE再生
+        SoundManager.PlaySE("SeMinoPop");
+
         // 表示中のミノをスポーン位置に移動
         nextMino_.transform.position = transform.position;
 

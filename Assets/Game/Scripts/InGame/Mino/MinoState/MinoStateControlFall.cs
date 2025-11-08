@@ -153,6 +153,9 @@ public class MinoStateControlFall : IMinoState
             return;
         }
 
+        // 回転SE再生
+        SoundManager.PlaySE("SeMinoRotation");
+
         _transform.Rotate(MinoConst.ROTATION_ANGLE);
     }
 
@@ -164,6 +167,9 @@ public class MinoStateControlFall : IMinoState
         // イベント登録解除
         _mino.PlayerInput.actions["Move"].performed -= OnMove;
         _mino.PlayerInput.actions["Rotation"].performed -= OnRotation;
+
+        // 接着SE再生
+        SoundManager.PlaySE("SeMinoInstallation");
 
         // タワーステートに変更
         _mino.TowerState();
